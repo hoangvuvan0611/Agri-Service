@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: AGRI
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/webflux_demo
+    username: postgres
+    password: Hoanglam06112003@
+  sql:
+    init:
+      mode: always                # Luôn thực thi scripts
+
+
+

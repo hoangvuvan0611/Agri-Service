@@ -1,0 +1,55 @@
+package com.hvv.agriservice.entity;
+
+import com.hvv.agriservice.constant.enums.StatusEnum;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+/**
+ * Doi tuong san pham, duoc ban tren trang web
+ */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "product")
+public class Product {
+    @Id
+    @Column("id")
+    private UUID id;
+    @Column("category_id")
+    private UUID categoryId;
+    @Column("name")
+    private String name;                    // Ten san pham
+    @Column("slug")
+    private String slug;                    // Duong dan cua san pham
+    @Column("description")
+    private String description;             // Mo ta san pham
+    @Column("price")
+    private BigDecimal price;               // Gia ban cua san pham
+    @Column("discount")
+    private BigDecimal discount;            // Giam gia cua san pham
+    @Column("quantity")
+    private Long quantity;                  // So luong san pham con lai
+    @Column("sold")
+    private Long sold;                      // So luong san pham da ban
+    @Column("status")
+    private StatusEnum status;              // Trang thai cua san pham, dang kinh doanh hoac ngung kinh doanh
+    @Column("featured")
+    private Boolean featured;               // Co la san pham noi bat hay khong
+    @Column("created_at")
+    private LocalDateTime createdAt;        // Thoi gian tao san pham
+    @Column("created_by")
+    private UUID createdBy;                 // User tao san pham
+    @Column("updated_at")
+    private LocalDateTime updatedAt;        // Thoi gian cap nhat san pham
+    @Column("updated_by")
+    private UUID updatedBy;                 // User cap nhat san pham
+}
