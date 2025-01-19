@@ -23,9 +23,9 @@ public class Customer {
     private UUID id;
     @Column("username")
     private String username;                // Ten su dung cua khach hang trong he thong
-    @Column("first_name")
+    @Column("firstname")
     private String firstName;               // Ho cua khach hang trong he thong
-    @Column("last_name")
+    @Column("lastname")
     private String lastName;                // Ten khach hang
     @Column("email")
     private String email;                   // Dia chi email
@@ -33,12 +33,12 @@ public class Customer {
     private String password;                // Mat khau
     @Column("address")
     private String address;                 // Dia chi
-    @Column("city")
-    private String city;                    // Thanh pho
-    @Column("district")
-    private String district;                // Quan huyen
-    @Column("postal_code")
-    private String postalCode;              // Ma buu dien cua khach hang
+    @Column("city_id")
+    private String cityId;                    // Thanh pho
+    @Column("district_id")
+    private String districtId;                // Quan huyen
+    @Column("ward_id")
+    private UUID wardId;                          // Id xa phuong
     @Column("phone_number")
     private String phoneNumber;             // So dien thoai
     @Column("created_at")

@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "review")
+@Table(name = "reviews")
 public class Review {
     @Id
     @Column("id")

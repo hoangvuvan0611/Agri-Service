@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cart_item")
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @Column("id")

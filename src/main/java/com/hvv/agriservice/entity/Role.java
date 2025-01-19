@@ -29,9 +29,9 @@ public class Role {
     @Column("created_at")
     private LocalDateTime createdAt;                        // Thời gian tạo mới vai trò
     @Column("created_by")
-    private UUID createdBy;                                 // Người tạo mới vai trò
+    private String createdBy;                                 // Người tạo mới vai trò
     @Column("updated_at")
     private LocalDateTime updatedAt;                        // Thời gian cập nhật thông tin vai trò
     @Column("updated_by")
-    private UUID updatedBy;                                 // Người cập nhật vai trò
+    private String updatedBy;                                 // Người cập nhật vai trò
 }

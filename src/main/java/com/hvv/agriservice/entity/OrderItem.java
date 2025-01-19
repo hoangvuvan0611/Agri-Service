@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orderItem")
+@Table(name = "order_items")
 public class OrderItem {
     @Id
     @Column("id")

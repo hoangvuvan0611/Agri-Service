@@ -25,16 +25,16 @@ public class User {
     private UUID id;
     @Column("username")
     private String username;                            // Tên người dùng
-    @Column("fullName")
+    @Column("full_name")
     private String fullName;                            // Họ tên đầy đủ
     @Column("date_of_birth")
     private LocalDate dateOfBirth;                      // Ngày sinh
     @Column("created_at")
     private LocalDateTime createdAt;                    // Thời gian tạo user
     @Column("created_by")
-    private UUID createdBy;                             // Người tạo user
+    private String createdBy;                             // Người tạo user
     @Column("updated_at")
     private LocalDateTime updatedAt;                    // Thời gian cập nhật user
     @Column("updated_by")
-    private UUID updatedBy;                             // Người cập nhật user
+    private String updatedBy;                             // Người cập nhật user
 }

@@ -18,14 +18,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "users_roles")
 public class UserRole {
-    @Id
     @Column("user_id")
     private UUID userId;                        // Id của đối tượng user
-    @Id
     @Column("role_id")
     private UUID roleId;                        // Id của đối tượng role
     @Column("created_at")
     private LocalDateTime createdAt;            // Thời gian phân quyền
     @Column("created_by")
-    private UUID createdBy;                     // User phân quyền
+    private String createdBy;                     // User phân quyền
 }

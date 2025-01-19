@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "category")
+@Table(name = "categories")
 public class Category {
     @Id
     @Column("id")
@@ -34,9 +34,9 @@ public class Category {
     @Column("created_at")
     private LocalDateTime createdAt;    // Thoi gian tao danh muc
     @Column("created_by")
-    private UUID createdBy;             // User tao danh muc
+    private String createdBy;             // User tao danh muc
     @Column("updated_at")
     private LocalDateTime updatedAt;    // Thoi gian cap nhat danh muc
     @Column("updated_by")
-    private UUID updatedBy;             // User cap nhat danh muc
+    private String updatedBy;             // User cap nhat danh muc
 }

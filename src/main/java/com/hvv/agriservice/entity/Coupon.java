@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "coupon")
+@Table(name = "coupons")
 public class Coupon {
     @Id
     @Column("id")
@@ -47,13 +47,9 @@ public class Coupon {
     @Column("created_at")
     private LocalDateTime createdAt;            // Thời gian tạo mới phiếu giảm giá
     @Column("created_by")
-    private UUID createdBy;                     // User tạo mới phiếu giảm giá
+    private String createdBy;                     // User tạo mới phiếu giảm giá
     @Column("updated_at")
     private LocalDateTime updatedAt;            // Thời gian cập nhật thông tin phiếu giảm giá
     @Column("updated_by")
-    private UUID updatedBy;                     // User cập nhật phiếu giảm giá
-    @Column("deleted_at")
-    private LocalDateTime deletedAt;            // Thời gian xóa phiếu giảm giá
-    @Column("deleted_by")
-    private UUID deletedBy;                     // User xóa phiếu giảm giá
+    private String updatedBy;                     // User cập nhật phiếu giảm giá
 }

@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     @Column("id")
@@ -47,9 +47,9 @@ public class Product {
     @Column("created_at")
     private LocalDateTime createdAt;        // Thoi gian tao san pham
     @Column("created_by")
-    private UUID createdBy;                 // User tao san pham
+    private String createdBy;                 // User tao san pham
     @Column("updated_at")
     private LocalDateTime updatedAt;        // Thoi gian cap nhat san pham
     @Column("updated_by")
-    private UUID updatedBy;                 // User cap nhat san pham
+    private String updatedBy;                 // User cap nhat san pham
 }

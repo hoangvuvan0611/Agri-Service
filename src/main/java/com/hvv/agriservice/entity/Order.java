@@ -18,7 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
     @Column("id")

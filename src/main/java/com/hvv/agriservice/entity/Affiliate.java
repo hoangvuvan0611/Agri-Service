@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "affiliate")
+@Table(name = "affiliates")
 public class Affiliate {
     @Id
     @Column("id")

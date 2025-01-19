@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "city")
+@Table(name = "cities")
 public class City {
     @Id
     @Column("id")
@@ -28,9 +28,9 @@ public class City {
     @Column("created_at")
     private LocalDateTime createdAt;            // Thoi gian tao moi
     @Column("created_by")
-    private UUID createdBy;                     // Nguoi tao thong tin
+    private String createdBy;                     // Nguoi tao thong tin
     @Column("updated_at")
     private LocalDateTime updatedAt;            // Thoi gian cap nhat
     @Column("updated_by")
-    private UUID updatedBy;                     // Nguoi cap nhat thong tin
+    private String updatedBy;                     // Nguoi cap nhat thong tin
 }
