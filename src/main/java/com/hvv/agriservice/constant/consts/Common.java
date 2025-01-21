@@ -68,4 +68,12 @@ public class Common {
     public interface RolePath {
         String ROLE_PATH = "/role";
     }
+
+    public interface UserPath {
+        String USER_PATH = "/user";
+    }
+
+    public interface WardPath {
+        String WARD_PATH = "/ward";
+    }
 }
