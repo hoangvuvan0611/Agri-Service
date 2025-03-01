@@ -39,14 +39,14 @@ CREATE TABLE IF NOT EXISTS products (
     id BIGINT PRIMARY KEY,
     category_id BIGINT NOT NULL REFERENCES categories(id),
     name VARCHAR(100) NOT NULL,
-    slug TEXT,
+    slug TEXT,                                                          -- Duong dan cua san pham
     description TEXT,
     price MONEY NOT NULL DEFAULT 0,
     discount DECIMAL NOT NULL DEFAULT 0,
     quantity INTEGER NOT NULL DEFAULT 0,
-    sold INTEGER NOT NULL DEFAULT 0,
+    sold INTEGER NOT NULL DEFAULT 0,                                    -- So luong san pham da ban
     status status_enum NOT NULL,
-    featured BOOLEAN,
+    featured BOOLEAN,                                                   -- San pham co noi bat khong
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(50),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
