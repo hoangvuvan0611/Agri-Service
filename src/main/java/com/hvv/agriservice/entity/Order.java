@@ -8,7 +8,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Doi tuong don hang
@@ -22,23 +21,23 @@ import java.util.UUID;
 public class Order {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("customer_id")
-    private UUID customerId;                        // Id cua khach hang
+    private Long customerId;                        // Id cua khach hang
     @Column("status")
     private OrderStatusEnum status;                 // Trang thai cua don hang
     @Column("shipping_fee")
     private BigDecimal shippingFee;                 // Phí giao hàng
     @Column("delivery_info_id")
-    private UUID deliveryInfoId;                    // Thông tin địa chỉ giao hàng
+    private Long deliveryInfoId;                    // Thông tin địa chỉ giao hàng
     @Column("total_fee")
     private BigDecimal totalFee;                    // Tổng tiền thanh toán
     @Column("payment_id")
-    private UUID paymentId;                         // Tham chiếu đến thông tin thanh toán
+    private Long paymentId;                         // Tham chiếu đến thông tin thanh toán
     @Column("coupon_id")
-    private UUID couponId;                          // Mã giảm giá nếu có
+    private Long couponId;                          // Mã giảm giá nếu có
     @Column("affiliate_id")
-    private UUID affiliateId;                       // Mã liên kết (mã giới thiệu)
+    private Long affiliateId;                       // Mã liên kết (mã giới thiệu)
     @Column("created_at")
     private LocalDateTime createdAt;                // Thoi gian tao don hang
     @Column("canceled_at")

@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: AGRI
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/AGRI_MARKET
+    username: postgres
+    password: Hoanglam06112003@
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration                           # Cấu hình migrarion flyway
+    url: jdbc:postgresql://localhost:5432/AGRI_MARKET
+    user: postgres
+    password: Hoanglam06112003@
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: debug

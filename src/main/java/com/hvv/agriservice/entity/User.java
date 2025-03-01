@@ -1,6 +1,5 @@
 package com.hvv.agriservice.entity;
 
-import com.hvv.agriservice.constant.enums.RoleEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -8,7 +7,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Đối tượng người dùng tại trang quản trị
@@ -22,7 +20,7 @@ import java.util.UUID;
 public class User {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("username")
     private String username;                            // Tên người dùng
     @Column("full_name")

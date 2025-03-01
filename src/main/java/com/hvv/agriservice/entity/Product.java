@@ -7,9 +7,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Doi tuong san pham, duoc ban tren trang web
@@ -23,9 +21,9 @@ import java.util.UUID;
 public class Product {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("category_id")
-    private UUID categoryId;
+    private Long categoryId;
     @Column("name")
     private String name;                    // Ten san pham
     @Column("slug")

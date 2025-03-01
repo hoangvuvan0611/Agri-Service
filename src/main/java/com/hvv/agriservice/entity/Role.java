@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Đối tượng vai trò cho người dùng trong trang quản trị
@@ -21,7 +20,7 @@ import java.util.UUID;
 public class Role {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("name")
     private RoleEnum name;                                  // Tên của vai trò
     @Column("description")

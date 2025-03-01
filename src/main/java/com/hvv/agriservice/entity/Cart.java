@@ -20,9 +20,9 @@ import java.util.UUID;
 public class Cart {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("customer_id")
-    private UUID customerId;                    // Id của khách hàng
+    private Long customerId;                    // Id của khách hàng
     @Column("created_at")
     private LocalDateTime createdAt;            // Thời gian tạo giỏ hàng
     @Column("updated_at")

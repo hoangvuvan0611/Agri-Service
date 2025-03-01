@@ -1,0 +1,81 @@
+id,category,slug,name,unit,original_price,sale_price,expiry_period,image,status,created_at,modified_at
+81,15,me-den-huu-co-health-paradise,Mè đen hữu cơ Health Paradise,200g,55000,99000,7,image/products\me-den-huu-co-health-paradise_3nrDOGt.jpg,1,2023-12-13 15:13:27,2024-05-28 02:31:29
+80,15,hat-hanh-nhan-huu-co-health-paradise,Hạt hạnh nhân hữu cơ Health Paradise,80g,142000,185000,7,image/products/hat-hanh-nhan-huu-co-health-paradise.jpg,1,2023-12-13 15:10:08,2024-05-28 02:12:12
+79,15,hat-dieu-boc-vo-lua-huu-co,Hạt điều bóc vỏ lụa hữu cơ,350g,189000,265000,7,image/products/hat-dieu-boc-vo-lua-huu-co.jpg,1,2023-12-13 15:09:07,2024-05-28 02:12:33
+78,15,hat-dieu-nuong-huu-co-mua,Hạt điều nướng hữu cơ Mùa,200g,144000,189000,7,image/products/hat-dieu-nuong-huu-co-mua.jpg,1,2023-12-13 15:08:20,2024-05-28 02:12:47
+77,15,hat-bi-huu-co-health-paradise,Hạt bí hữu cơ Health Paradise,200g,120000,160000,7,image/products/hat-bi-huu-co-health-paradise.jpg,1,2023-12-13 15:07:35,2024-05-28 02:33:16
+76,15,me-den-huu-co-mua,Mè đen hữu cơ Mùa,200g,66000,99000,7,image/products/me-den-huu-co-mua.jpg,1,2023-12-13 15:06:42,2024-05-28 02:31:50
+75,14,dau-tay-trang-co-tu,Đậu tây trắng Cơ tu,500g,66000,99000,7,image/products/dau-trang-co-tu.jpg,1,2023-12-13 15:05:15,2024-05-28 02:13:13
+74,14,dau-ga-huu-co-global-organics,Đậu gà hữu cơ Global Organics,400g,45000,65000,7,image/products/dau-ga-huu-co-global-organics.jpg,1,2023-12-13 15:04:20,2024-05-28 02:13:53
+73,14,dau-xanh-huu-co-nguyen-vo-parliament,Đậu xanh hữu cơ nguyên vỏ Parliament,500g,77000,119000,7,image/products/dau-xanh-huu-co-nguyen-vo-parliament.jpg,1,2023-12-13 15:03:32,2024-05-28 02:14:09
+72,14,dau-ga-huu-co-health-paradise,Đậu gà hữu cơ Health Paradise,500g,91000,138000,7,image/products/dau-ga-huu-co-health-paradise.jpg,1,2023-12-13 15:02:33,2024-05-28 02:14:35
+71,14,dau-phong-huu-co-mua,Đậu phộng hữu cơ Mùa,250g,69000,99000,7,image/products/dau-phong-huu-co-mua.jpg,1,2023-12-13 15:01:46,2024-05-28 02:15:00
+70,14,dau-do-mua,Đậu đỏ Mùa,500g,100000,140000,7,image/products/dau-do-mua.jpg,1,2023-12-13 15:01:05,2024-05-28 02:15:15
+69,13,gao-lut-huu-co-mua,Gạo lứt Hữu cơ Mùa,2kg,114000,169000,7,image/products/gao-lut-huu-co-mua.jpg,1,2023-12-13 14:59:34,2024-05-28 02:15:32
+68,13,yen-mach-can-mong-huu-co-health-paradise,Yến mạch Cán mỏng Hữu cơ Health Paradise,500g,74000,110000,7,image/products/yen-mach-can-mong-huu-co-health-paradise.jpg,1,2023-12-13 14:58:54,2024-05-28 02:15:45
+67,1,ngu-coc-gion-muesli-mix-trai-cay-huu-co-sottolestelle,Ngũ cốc giòn Muesli mix trái cây hữu cơ Sottolestelle,350g,122000,185000,7,image/products/ngu-coc-gion-muesli-mix-trai-cay-huu-co-sottolestelle.jpg,1,2023-12-13 14:57:57,2024-05-28 02:16:08
+66,13,gao-nep-cai-hoa-vang-mua,Gạo nếp cái hoa vàng Mùa,1kg,60000,99000,7,image/products/gao-nep-cai-hoa-vang-mua.jpg,1,2023-12-13 14:56:49,2024-05-28 02:16:22
+65,13,yen-mach-huu-co-can-vua-khong-chua-gluten-bobs-red-mill,Yến mạch hữu cơ cán vừa không chứa Gluten Bob's Red Mill,907g,285000,329000,7,image/products/yen-mach-huu-co-can-vua-khong-chua-gluten-bobs-red-mill.jpg,1,2023-12-13 14:55:56,2024-05-28 02:16:36
+64,13,gao-st25-huu-co-mua,Gạo ST25 hữu cơ Mùa,2kg,100000,169000,7,image/products/gao-st25-huu-co-mua.jpg,1,2023-12-13 14:50:59,2024-05-28 02:16:51
+63,12,man-kho-huu-co-health-paradise,Mận khô hữu cơ Health Paradise,200g,190000,250000,7,image/products/man-kho-huu-co-health-paradise.jpg,1,2023-12-13 14:48:37,2024-05-28 02:17:03
+62,12,tao-tau-huu-co,Táo tàu hữu cơ,200g,95000,136000,7,image/products/tao-tau-huu-co.jpg,1,2023-12-13 14:47:44,2024-05-28 02:17:20
+61,12,ky-tu-huu-co,Kỷ tử hữu cơ,200g,157000,246000,7,image/products/ky-tu-huu-co.jpg,1,2023-12-13 14:46:58,2024-05-28 02:17:31
+60,12,qua-sung-say-huu-co-health-paradise,Quả sung sấy hữu cơ Health Paradise,200g,146000,198000,7,image/products/qua-sung-say-huu-co-health-paradise.jpg,1,2023-12-13 14:46:11,2024-05-28 02:17:44
+59,12,long-nhan,Long nhãn,200g,50000,99000,7,image/products/long-nhan.jpg,1,2023-12-13 14:45:12,2024-05-28 02:17:57
+58,11,hon-hop-tao-kiwi-va-cai-xoan-huu-co-oob,"Hỗn hợp táo, kiwi và cải xoăn hữu cơ OOB",450g,196000,288000,7,image/products/hon-hop-tao-kiwi-va-cai-xoan-huu-co-oob.jpg,1,2023-12-13 14:43:22,2024-05-28 02:18:16
+57,11,viet-quat-huu-co-oob,Việt quất hữu cơ OOB,450g,216000,288000,7,image/products/viet-quat-huu-co-oob.jpg,1,2023-12-13 14:42:22,2024-05-28 02:18:33
+56,11,hon-hop-viet-quat-phuc-bon-tu-va-dau-tay-huu-co-oob,"Hỗn hợp việt quất, phúc bồn tử và dâu tây hữu cơ OOB",500g,200000,288000,7,image/products/hon-hop-viet-quat-phuc-bon-tu-va-dau-tay-huu-co-oob.jpg,1,2023-12-13 14:40:41,2024-05-28 02:18:46
+55,11,dau-hoa-lan-cap-dong-huu-co-oob,Đậu hòa lan cấp đông hữu cơ OOB,400g,100000,149000,7,image/products\dau-hoa-lan-cap-dong-huu-co-oob_ekxZpLt.jpg,1,2023-12-13 14:39:33,2024-05-28 02:32:56
+54,11,bo-dong-lanh-okitchen,Bơ đông lạnh Okitchen,350g,120000,163000,7,image/products/bo-dong-lanh-okitchen.jpg,1,2023-12-13 14:38:43,2024-05-28 02:19:15
+53,11,dau-cap-dong-okitchen,Dâu cấp đông Okitchen,450g,242000,315000,7,image/products/dau-tay-cap-dong-okitchen.jpg,1,2023-12-13 14:37:34,2024-05-28 02:19:30
+52,10,tao-dazzle-huu-co,Táo Dazzle hữu cơ,1kg,170000,220000,7,image/products/tao-dazzle-huu-co.jpg,1,2023-12-13 14:35:16,2024-05-28 02:19:55
+51,10,kiwi-vang-huu-co-zespri,Kiwi vàng hữu cơ Zespri,500g,130000,170000,7,image/products/kiwi-vang-huu-co-zespri.jpg,1,2023-12-13 14:34:14,2024-05-28 02:20:05
+50,9,bo-034,Bơ-034,1kg,78000,115000,7,image/products/bo-034.jpg,1,2023-12-13 14:31:41,2024-05-28 02:20:16
+49,9,dua-bo-huu-co,Dưa bở Hữu cơ,1kg,60000,85000,7,image/products/dua-bo-huu-co.jpg,1,2023-12-13 14:30:53,2024-05-28 02:20:34
+48,9,dua-luoi-tl3,Dưa lưới TL3,1.3kg,122000,175500,7,image/products/dua-luoi-tl3.jpg,1,2023-12-13 14:30:07,2024-05-28 02:20:44
+47,9,dua-hoang-hau,Dứa hoàng hậu,1kg,85000,95000,7,image/products/dua-hoang-hau.jpg,1,2023-12-13 14:29:03,2024-05-28 02:20:57
+46,9,oi-le,Ổi lê,1kg,77000,99000,7,image/products/oi-le.jpg,1,2023-12-13 14:28:03,2024-05-28 02:21:06
+45,9,cam-vinh,Cam Vinh,1kg,62000,105000,7,image/products/cam-vinh.jpg,1,2023-12-13 14:27:05,2024-05-28 02:21:17
+44,9,bo-booth,Bơ Booth,1kg,75000,105000,7,image/products/bo-booth.jpg,1,2023-12-13 14:26:15,2024-05-28 02:21:38
+43,9,dau-tay,Dâu tây,1kg,300000,390000,7,image/products/dau-tay.jpg,1,2023-12-13 14:24:57,2024-05-28 02:21:55
+42,8,ngo-ngot-cap-dong,Ngô ngọt cấp đông,300g,77000,99000,7,image/products/ngo-ngot-cap-dong.jpg,1,2023-12-13 14:14:14,2024-05-28 02:22:10
+41,8,khoai-tay-cap-dong,Khoai tây cấp đông,500g,63000,75000,7,image/products/khoai-tay-cap-dong.jpg,1,2023-12-13 14:13:21,2024-05-28 02:22:23
+40,8,hanh-tay-cap-dong,Hành Tây Cấp Đông,500g,60000,75000,7,image/products/hanh-tay-cap-dong.jpg,1,2023-12-13 14:12:08,2024-05-28 02:22:34
+39,8,khoai-so-cap-dong,Khoai sọ cấp đông,500g,75000,105000,7,image/products/khoai-so-cap-dong.jpg,1,2023-12-13 14:11:11,2024-05-28 02:22:50
+38,7,nam-huong-dong-co-mua,Nấm hương/ Đông cô Mùa,150g,225000,290000,7,image/products/nam-huong-nam-dong-co-mua.jpg,1,2023-12-13 14:08:19,2024-05-28 02:23:10
+37,7,moc-nhinam-meo-huu-co-mua,Mộc nhĩ/Nấm mèo hữu cơ Mùa,150g,100000,130000,7,image/products/nam-meo-huu-co.jpg,1,2023-12-13 14:05:01,2024-05-28 02:23:35
+36,7,nam-huong-huu-co,Nấm hương hữu cơ,200g,37000,50000,7,image/products/nam-huong-huu-co.jpg,1,2023-12-13 14:03:53,2024-05-28 02:24:50
+35,7,nam-dui-ga-huu-co,Nấm đùi gà hữu cơ,200g,39000,50000,7,image/products/nam-dui-ga-huu-co.jpg,1,2023-12-13 14:03:05,2024-05-28 02:25:07
+34,7,nam-mo-trang,Nấm mỡ trắng,300g,73000,96000,7,image/products/nam-mo-trang.jpg,1,2023-12-13 14:02:18,2024-05-28 02:25:16
+33,6,thi-la-huu-co,Thì là hữu cơ,100g,12000,21000,7,image/products/thi-la-huu-co.jpg,1,2023-12-13 14:00:39,2024-05-28 02:25:24
+32,6,ngo-ri-huu-co,Ngò rí hữu cơ,100g,13000,21000,7,image/products/ngo-ri-huu-co.jpg,1,2023-12-13 13:59:51,2024-05-28 02:25:33
+31,6,ot-huu-co,Ớt hữu cơ,150g,18000,24750,7,image/products/ot-huu-co.jpg,1,2023-12-13 13:58:50,2024-05-28 02:25:47
+30,6,gung-huu-co,Gừng hữu cơ,100g,15000,25000,7,image/products/gung-huu-co.jpg,1,2023-12-13 13:58:06,2024-05-28 02:25:57
+29,6,hon-hop-rau-gia-vi-huu-co,Hỗn hợp rau gia vị hữu cơ,150g,22000,31500,7,image/products/hon-hop-rau-gia-vi-huu-co.jpg,1,2023-12-13 13:57:13,2024-05-28 02:26:08
+28,6,hanh-la,Hành lá,250g,35000,52500,7,image/products/hanh-la.jpg,1,2023-12-13 13:56:07,2024-05-28 02:26:17
+26,4,bong-cai-xanh,Bông cải xanh,300g,35000,45000,7,image/products/bong-cai-xanh.jpg,1,2023-12-13 13:50:37,2024-05-28 02:26:29
+25,4,bong-cai-trang,Bông cải trắng,400g,40000,60000,7,image/products/bong-cai-trang.jpg,1,2023-12-13 13:49:36,2024-05-28 02:26:38
+24,3,ca-chua-huu-co,Cà chua hữu cơ,500g,40000,55000,7,image/products/ca-chua-huu-co.jpg,1,2023-12-11 20:03:06,2024-05-28 02:26:48
+23,3,ot-chuong,Ớt chuông,350g,52000,63000,7,image/products/ot-chuong.jpg,1,2023-12-11 20:01:28,2024-05-28 02:27:18
+22,3,dau-cove,Đậu cove,300g,23500,35700,7,image/products/dau-cove.jpg,1,2023-11-18 21:45:10,2024-05-28 02:27:26
+21,3,muop-tao-huu-co,Mướp táo hữu cơ,700g,40000,66500,7,image/products/muop-tao-huu-co.jpg,1,2023-11-18 21:43:03,2024-05-28 02:27:36
+20,3,ca-chua-bi-cherry-vang,Cà chua bi cherry vàng,400g,42000,60000,7,image/products/ca-chua-bi-cherry-vang.jpg,1,2023-11-18 21:41:36,2024-05-28 02:27:46
+19,3,ca-chua-bi-socola,Cà chua bi socola,400g,48000,60000,7,image/products/ca-chua-bi-socola.jpg,1,2023-11-18 21:39:46,2024-05-28 02:27:55
+18,3,bi-do-nhat,Bí đỏ Nhật,400g,23000,38000,7,image/products/bi-do-nhat.jpg,1,2023-11-18 21:37:46,2024-05-28 02:28:03
+17,3,ca-chua-bi-ngoc-bich,Cà chua bi ngọc bích,300g,50000,63000,7,image/products/ca-chua-ngoc-bich.jpg,1,2023-11-18 21:35:20,2024-05-28 02:28:13
+16,2,hanh-tim-huu-co,Hành tím hữu cơ,250g,41500,61250,7,image/products/hanh-tim-huu-co.jpg,1,2023-11-18 21:31:35,2024-05-28 02:28:22
+15,2,ca-rot,Cà rốt,400g,32000,44000,7,image/products/ca-rot.jpg,1,2023-11-18 21:29:44,2024-05-28 02:28:31
+14,2,khoai-tay,Khoai tây,500g,40000,52500,7,image/products/khoai-tay.jpg,1,2023-11-18 21:27:05,2024-05-28 02:28:39
+13,2,cu-den,Củ dền,300g,20000,31500,7,image/products/cu-den.jpg,1,2023-11-18 21:22:09,2024-05-28 02:28:46
+12,2,cu-gung,Củ gừng,100g,12500,25000,7,image/products/cu-gung.jpg,1,2023-11-18 21:20:49,2024-05-28 02:28:55
+11,2,cu-cai-do,Củ cải đỏ,300g,50000,63000,7,image/products/cu-cai-do.jpg,1,2023-11-18 21:17:23,2024-05-28 02:29:04
+10,2,cu-nghe,Củ nghệ,150g,25000,37500,7,image/products/cu-nghe.jpg,1,2023-11-18 21:14:02,2024-05-28 02:29:12
+9,2,toi-kho,Tỏi khô,200g,35000,50000,7,image/products/toi-kho.jpg,1,2023-11-18 21:10:52,2024-05-28 02:29:20
+8,1,cai-xoan-kale-huu-co,Cải xoăn kale hữu cơ,300g,50000,63000,7,image/products/cai-xoan-kale-huu-co.jpg,1,2023-11-18 21:06:42,2024-05-28 02:29:28
+7,1,xa-lach-rocket,Xà lách Rocket,200g,36000,42000,7,image/products/xa-lach-rocket.jpg,1,2023-11-18 21:04:42,2024-05-28 02:29:37
+6,1,bap-cai-su-tim,Bắp cải sú tim,400g,35000,46000,7,image/products/bap-cai-su-tim.jpg,1,2023-11-18 21:01:29,2024-05-28 02:29:44
+5,1,rau-den-huu-co,Rau dền hữu cơ,300g,19000,25500,7,image/products/rau-den-huu-co.jpg,1,2023-11-18 20:59:48,2024-05-28 02:29:53
+4,1,cai-bo-xoi,Cải bó xôi,300g,28000,37500,7,image/products/cai-bo-xoi.jpg,1,2023-11-18 20:57:33,2024-05-28 02:30:05
+3,1,xa-lach-romaine,Xà lách romaine,250g,23000,32250,7,image/products/Xa-lach-romaine.jpg,1,2023-11-18 20:55:18,2024-05-28 02:30:14
+2,1,cai-be-huu-co,Cải bẹ hữu cơ,300g,18000,25500,7,image/products/cai-be-huu-co.jpg,1,2023-11-18 20:51:40,2024-05-28 02:30:22
+1,1,can-tay,Cần tây,500g,80000,97500,7,image/products/can-tay.jpg,1,2023-11-18 20:42:51,2024-05-28 02:30:30

@@ -17,8 +17,8 @@ CREATE TYPE coupon_type_enum AS ENUM ('PERCENT', 'FIXED_AMOUNT');
 
 -- Tạo bảng categories và index
 CREATE TABLE IF NOT EXISTS categories (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    parent_id UUID REFERENCES categories(id),
+    id BIGINT PRIMARY KEY,
+    parent_id BIGINT REFERENCES categories(id),
     name VARCHAR(100) NOT NULL,
     slug TEXT,
     description TEXT,
@@ -36,8 +36,8 @@ CREATE INDEX idx_categories_status ON categories(status);
 
 -- Tạo bảng products và index
 CREATE TABLE IF NOT EXISTS products (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    category_id UUID NOT NULL REFERENCES categories(id),
+    id BIGINT PRIMARY KEY,
+    category_id BIGINT NOT NULL REFERENCES categories(id),
     name VARCHAR(100) NOT NULL,
     slug TEXT,
     description TEXT,
@@ -60,7 +60,7 @@ CREATE INDEX idx_products_featured ON products(featured);
 
 -- Tạo bảng cities và index
 CREATE TABLE IF NOT EXISTS cities (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     postal_code VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -73,7 +73,7 @@ CREATE INDEX idx_cities_name ON cities(name);
 
 -- Tạo bảng districts và index
 CREATE TABLE IF NOT EXISTS districts (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     name VARCHAR(100),
     postal_code VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -86,7 +86,7 @@ CREATE INDEX idx_districts_name ON districts(name);
 
 -- Tạo bảng wards và index
 CREATE TABLE IF NOT EXISTS wards (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     postal_code VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -99,15 +99,15 @@ CREATE INDEX idx_wards_name ON wards(name);
 
 -- Tạo bảng customers và index
 CREATE TABLE IF NOT EXISTS customers (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     firstname VARCHAR(100),
     lastname VARCHAR(100),
     email VARCHAR(100),
     password VARCHAR(100),
     address VARCHAR(100),
-    city_id UUID REFERENCES cities(id),
-    district_id UUID REFERENCES districts(id),
+    city_id BIGINT REFERENCES cities(id),
+    district_id BIGINT REFERENCES districts(id),
     phone_number VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -120,7 +120,7 @@ CREATE INDEX idx_customers_district ON customers(district_id);
 
 -- Tạo bảng assets và index
 CREATE TABLE IF NOT EXISTS assets (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     filename VARCHAR(50) NOT NULL,
     path VARCHAR(100),
     type assets_type_enum NOT NULL,
@@ -132,9 +132,9 @@ CREATE INDEX idx_assets_type ON assets(type);
 
 -- Tạo bảng product_asset và index
 CREATE TABLE IF NOT EXISTS product_asset (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    product_id UUID NOT NULL REFERENCES products(id),
-    asset_id UUID NOT NULL REFERENCES assets(id),
+    id BIGINT PRIMARY KEY,
+    product_id BIGINT NOT NULL REFERENCES products(id),
+    asset_id BIGINT NOT NULL REFERENCES assets(id),
     type VARCHAR(50) NOT NULL
 );
 CREATE INDEX idx_product_asset_product ON product_asset(product_id);
@@ -142,8 +142,8 @@ CREATE INDEX idx_product_asset_asset ON product_asset(asset_id);
 
 -- Tạo bảng carts và index
 CREATE TABLE IF NOT EXISTS carts (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID NOT NULL REFERENCES customers(id),
+    id BIGINT PRIMARY KEY,
+    customer_id BIGINT NOT NULL REFERENCES customers(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -151,9 +151,9 @@ CREATE INDEX idx_carts_customer ON carts(customer_id);
 
 -- Tạo bảng cart_items và index
 CREATE TABLE IF NOT EXISTS cart_items (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    cart_id UUID NOT NULL REFERENCES carts(id),
-    product_id UUID NOT NULL REFERENCES products(id),
+    id BIGINT PRIMARY KEY,
+    cart_id BIGINT NOT NULL REFERENCES carts(id),
+    product_id BIGINT NOT NULL REFERENCES products(id),
     quantity BIGINT NOT NULL DEFAULT 0,
     price MONEY DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -164,7 +164,7 @@ CREATE INDEX idx_cart_items_product ON cart_items(product_id);
 
 -- Tạo bảng coupons và index
 CREATE TABLE IF NOT EXISTS coupons (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    id BIGINT PRIMARY KEY,
     coupon_code VARCHAR(50),
     coupon_type coupon_type_enum,
     coupon_value money DEFAULT 0,
@@ -186,8 +186,8 @@ CREATE INDEX idx_coupons_dates ON coupons(coupon_start_time, coupon_end_time);
 
 -- Tạo bảng affiliates và index
 CREATE TABLE IF NOT EXISTS affiliates (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID REFERENCES customers(id),
+    id BIGINT PRIMARY KEY,
+    customer_id BIGINT REFERENCES customers(id),
     code VARCHAR(50),
     commision MONEY,
     balance MONEY,
@@ -201,28 +201,28 @@ CREATE INDEX idx_affiliates_active ON affiliates(is_active);
 
 -- Tạo bảng delivery_info và index
 CREATE TABLE IF NOT EXISTS delivery_info (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID REFERENCES customers(id),
+    id BIGINT PRIMARY KEY,
+    customer_id BIGINT REFERENCES customers(id),
     phone_number VARCHAR(50),
     address VARCHAR(100),
-    city_id UUID REFERENCES cities(id),
-    district_id UUID REFERENCES districts(id),
-    ward_id UUID REFERENCES wards(id)
+    city_id BIGINT REFERENCES cities(id),
+    district_id BIGINT REFERENCES districts(id),
+    ward_id BIGINT REFERENCES wards(id)
 );
 CREATE INDEX idx_delivery_customer ON delivery_info(customer_id);
 CREATE INDEX idx_delivery_phone ON delivery_info(phone_number);
 
 -- Tạo bảng orders và index
 CREATE TABLE IF NOT EXISTS orders (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    customer_id UUID NOT NULL REFERENCES customers(id),
+    id BIGINT PRIMARY KEY,
+    customer_id BIGINT NOT NULL REFERENCES customers(id),
     status order_status_enum,
     shipping_fee MONEY,
-    delivery_info_id UUID REFERENCES delivery_info(id),
+    delivery_info_id BIGINT REFERENCES delivery_info(id),
     total_fee MONEY,
-    payment_id UUID,
-    coupon_id UUID REFERENCES coupons(id),
-    affiliate_id UUID REFERENCES affiliates(id),
+    payment_id BIGINT,
+    coupon_id BIGINT REFERENCES coupons(id),
+    affiliate_id BIGINT REFERENCES affiliates(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     canceled_at TIMESTAMP,
     completed_at TIMESTAMP,
@@ -238,9 +238,9 @@ CREATE INDEX idx_orders_affiliate ON orders(affiliate_id);
 
 -- Tạo bảng order_items và index
 CREATE TABLE IF NOT EXISTS order_items (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    order_id UUID NOT NULL REFERENCES orders(id),
-    product_id UUID NOT NULL REFERENCES products(id),
+    id BIGINT PRIMARY KEY,
+    order_id BIGINT NOT NULL REFERENCES orders(id),
+    product_id BIGINT NOT NULL REFERENCES products(id),
     name VARCHAR(100) NOT NULL,
     quantity BIGINT DEFAULT 0,
     price MONEY DEFAULT 0,
@@ -252,9 +252,9 @@ CREATE INDEX idx_order_items_product ON order_items(product_id);
 
 -- Tạo bảng reviews và index
 CREATE TABLE IF NOT EXISTS reviews (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    product_id UUID NOT NULL REFERENCES products(id),
-    customer_id UUID NOT NULL REFERENCES customers(id),
+    id BIGINT PRIMARY KEY,
+    product_id BIGINT NOT NULL REFERENCES products(id),
+    customer_id BIGINT NOT NULL REFERENCES customers(id),
     rating SMALLINT,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
@@ -266,3 +266,45 @@ CREATE INDEX idx_reviews_product ON reviews(product_id);
 CREATE INDEX idx_reviews_customer ON reviews(customer_id);
 CREATE INDEX idx_reviews_rating ON reviews(rating);
 CREATE INDEX idx_reviews_approved ON reviews(is_approved);
+
+
+-- Tạo bảng user va index
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    full_name VARCHAR(100),
+    date_of_birth DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(50),
+    UNIQUE (username)
+);
+CREATE INDEX idx_users_username ON users(username);
+
+CREATE TABLE IF NOT EXISTS roles (
+    id BIGINT PRIMARY KEY,
+    name role_enum NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(50),
+    UNIQUE (name)
+);
+
+CREATE TABLE IF NOT EXISTS users_roles (
+    user_id BIGINT REFERENCES users(id),
+    role_id BIGINT REFERENCES roles(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50),
+    PRIMARY KEY (user_id, role_id)
+);
+
+-- Tạo bảng attributes và index
+CREATE TABLE IF NOT EXISTS attributes (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+CREATE INDEX idx_attributes_name ON attributes(name);

@@ -6,7 +6,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Doi tuong chua danh sach quan huyen
@@ -20,7 +19,7 @@ import java.util.UUID;
 public class District {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("name")
     private String name;                        // Ten quan huyen
     @Column("postal_code")

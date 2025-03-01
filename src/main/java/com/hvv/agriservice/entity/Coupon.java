@@ -9,7 +9,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Đối tượng mã giảm giá
@@ -23,7 +22,7 @@ import java.util.UUID;
 public class Coupon {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("coupon_code")
     private String couponCode;                  // Mã code giảm giá
     @Column("coupon_type")

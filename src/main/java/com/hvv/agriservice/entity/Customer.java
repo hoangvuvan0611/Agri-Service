@@ -6,7 +6,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Doi tuong khach hang
@@ -20,7 +19,7 @@ import java.util.UUID;
 public class Customer {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("username")
     private String username;                // Ten su dung cua khach hang trong he thong
     @Column("firstname")
@@ -38,7 +37,7 @@ public class Customer {
     @Column("district_id")
     private String districtId;                // Quan huyen
     @Column("ward_id")
-    private UUID wardId;                          // Id xa phuong
+    private Long wardId;                          // Id xa phuong
     @Column("phone_number")
     private String phoneNumber;             // So dien thoai
     @Column("created_at")

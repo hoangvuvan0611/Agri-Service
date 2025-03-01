@@ -5,6 +5,12 @@ public class Common {
     public static final String UPDATE = "/update";
     public static final String CREATE = "/create";
 
+    public interface UrlCommon {
+        String PRODUCT_CSV_PATH = "metadata/Product.csv";
+        String CATEGORY_CSV_PATH = "metadata/Category.csv";
+        String DESCRIPTION_CSV_PATH = "metadata/Description.csv";
+    }
+
     public interface OrderPath {
         String ORDER_PATH = "/order";
     }

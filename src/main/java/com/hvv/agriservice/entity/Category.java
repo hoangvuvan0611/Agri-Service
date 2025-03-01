@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,9 +17,9 @@ import java.util.UUID;
 public class Category {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("parent_id")
-    private UUID parentId;              // Danh muc cha neu co
+    private Long parentId;              // Danh muc cha neu co
     @Column("name")
     private String name;                // Ten danh muc
     @Column("slug")

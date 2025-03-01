@@ -1,4 +1,4 @@
-package com.hvv.agriservice.config;
+package com.hvv.agriservice.config.db;
 
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.context.annotation.Bean;

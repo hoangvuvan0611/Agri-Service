@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Đối tượng thể hiện tiếp thị liên kết
@@ -21,9 +20,9 @@ import java.util.UUID;
 public class Affiliate {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("customer_id")
-    private UUID customerId;                    // Id của khách hàng liên kết
+    private Long customerId;                    // Id của khách hàng liên kết
     @Column("code")
     private String code;                        // Mã code của affiliate
     @Column("commission")

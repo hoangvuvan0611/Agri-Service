@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Thông tin chi tiết sản phẩm trong đơn hàng:
@@ -23,11 +22,11 @@ import java.util.UUID;
 public class OrderItem {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("order_id")
-    private UUID orderId;                       // Id của đơn hàng
+    private Long orderId;                       // Id của đơn hàng
     @Column("product_id")
-    private UUID productId;                     // Id product
+    private Long productId;                     // Id product
     @Column("name")
     private String name;                        // Tên sản phẩm đặt hàng
     @Column("quantity")

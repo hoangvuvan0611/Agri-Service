@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @Builder
@@ -16,11 +14,11 @@ import java.util.UUID;
 public class ProductAsset {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("product_id")
-    private UUID productId;                     // Id của sản phẩm
+    private Long productId;                     // Id của sản phẩm
     @Column("asset_id")
-    private UUID assetId;                       // Id của asset
+    private Long assetId;                       // Id của asset
     @Column("type")
     private String type;
 }

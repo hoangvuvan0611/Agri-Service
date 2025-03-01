@@ -1,0 +1,16 @@
+id,slug,name,image,status,created_at
+15,hat,Hạt,image/categories/hat.jpg,1,2023-12-13 15:05:49
+14,dau,Đậu,image/categories/dau.jpg,1,2023-12-13 15:00:08
+13,gao-va-ngu-coc,Gạo và ngũ cốc,image/categories/gao-va-ngu-coc.jpg,1,2023-12-13 14:49:57
+12,trai-cay-say,Trái cây sấy,image/categories/trai-cay-say.jpg,1,2023-12-13 14:44:02
+11,trai-cay-dong-lanh,Trái cây đông lạnh,image/categories/trai-cay-dong-lanh.jpg,1,2023-12-13 14:36:24
+10,trai-cay-nhap-khau,Trái cây nhập khẩu,image/categories/trai-cay-nhap-khau.jpg,1,2023-12-13 14:32:52
+9,trai-cay-trong-nuoc,Trái cây trong nước,image/categories/trai-cay-trong-nuoc.jpg,1,2023-12-13 14:23:38
+8,rau-cu-dong-lanh,Rau củ đông lạnh,image/categories/rau-cu-dong-lanh.jpg,1,2023-12-13 14:09:36
+7,nam,Nấm,image/categories/nam.jpg,1,2023-12-13 14:00:48
+6,rau-gia-vi,Rau gia vị,image/categories/rau-gia-vi.jpg,1,2023-12-13 13:54:57
+5,rau-an-than,Rau ăn thân,image/categories/rau-an-than.jpg,1,2023-12-13 13:51:06
+4,rau-an-hoa,Rau ăn hoa,image/categories/rau-an-hoa.jpg,1,2023-11-21 21:12:44
+3,rau-an-qua,Rau ăn quả,image/categories/rau-an-qua.jpg,1,2023-11-18 21:32:15
+2,rau-an-cu,Rau ăn củ,image/categories/rau-an-cu.jpg,1,2023-11-18 21:07:43
+1,rau-an-la,Rau ăn lá,image/categories/rau-an-la.jpg,1,2023-11-18 20:38:29

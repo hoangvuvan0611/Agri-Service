@@ -6,7 +6,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Bảng đánh giá sản phẩm của người dùng
@@ -20,11 +19,11 @@ import java.util.UUID;
 public class Review {
     @Id
     @Column("id")
-    private UUID id;
+    private Long id;
     @Column("product_id")
-    private UUID productId;                         // Id của sản phẩm được đánh giá
+    private Long productId;                         // Id của sản phẩm được đánh giá
     @Column("customer_id")
-    private UUID customerId;                        // Id của khách hàng đánh giá
+    private Long customerId;                        // Id của khách hàng đánh giá
     @Column("rating")
     private Integer rating;                         // Điểm đánh giá 1 - 5
     @Column("title")
