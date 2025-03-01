@@ -4,8 +4,6 @@ import com.hvv.agriservice.entity.Assets;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface AssetRepository extends ReactiveCrudRepository<Assets, UUID> {
+public interface AssetRepository extends ReactiveCrudRepository<Assets, Long> {
 }

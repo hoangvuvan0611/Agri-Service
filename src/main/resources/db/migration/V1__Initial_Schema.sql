@@ -41,7 +41,10 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(100) NOT NULL,
     slug TEXT,                                                          -- Duong dan cua san pham
     description TEXT,
-    price MONEY NOT NULL DEFAULT 0,
+    unit VARCHAR(50),
+    original_price MONEY NOT NULL DEFAULT 0,
+    sale_price MONEY NOT NULL DEFAULT 0,
+    expiry_period INTEGER NOT NULL DEFAULT 0,
     discount DECIMAL NOT NULL DEFAULT 0,
     quantity INTEGER NOT NULL DEFAULT 0,
     sold INTEGER NOT NULL DEFAULT 0,                                    -- So luong san pham da ban
@@ -308,3 +311,19 @@ CREATE TABLE IF NOT EXISTS attributes (
     description TEXT
 );
 CREATE INDEX idx_attributes_name ON attributes(name);
+
+-- Tạo bảng user va index
+CREATE TABLE IF NOT EXISTS descriptions (
+    id BIGINT PRIMARY KEY,
+    product_id BIGINT NOT NULL REFERENCES products(id),
+    certificate TEXT,                                   -- Giay chung nhan
+    origin VARCHAR(100),                                -- Nguon goc
+    uses TEXT,                                          -- Cong dung, chi tiet ve san pham
+    instructions_for_use TEXT,                          -- Huong dan su dung
+    preserving_instruction TEXT,                        -- Huong dan bao quan
+    expiry VARCHAR(50),                                 -- Thoi gian het han
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by VARCHAR(50),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(50)
+);

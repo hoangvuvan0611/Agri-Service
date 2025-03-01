@@ -1,10 +1,16 @@
 package com.hvv.agriservice.bootstrap;
 
+import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
 import com.hvv.agriservice.constant.consts.Common;
+import com.hvv.agriservice.constant.enums.StatusEnum;
+import com.hvv.agriservice.entity.Category;
+import com.hvv.agriservice.entity.Description;
 import com.hvv.agriservice.entity.Product;
+import com.hvv.agriservice.repository.CategoryRepository;
+import com.hvv.agriservice.repository.DescriptionRepository;
 import com.hvv.agriservice.repository.ProductRepository;
+import com.hvv.agriservice.utils.DataUtils;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -12,26 +18,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class DataBootstrap implements CommandLineRunner {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final SnowflakeIdGenerator snowflakeIdGenerator;
+    private final DescriptionRepository descriptionRepository;
 
     Logger log = LoggerFactory.getLogger(DataBootstrap.class);
 
-    public DataBootstrap(ProductRepository productRepository) {
+    public DataBootstrap(ProductRepository productRepository, CategoryRepository categoryRepository, SnowflakeIdGenerator snowflakeIdGenerator, DescriptionRepository descriptionRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.snowflakeIdGenerator = snowflakeIdGenerator;
+        this.descriptionRepository = descriptionRepository;
     }
 
     String productCsvFilePath;
@@ -46,47 +60,171 @@ public class DataBootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        bootstrapData()
-//                .subscribe(
-//                        result -> log.info("Bootstrap complete " + result),
-//                        error -> log.error("Bootstrap failed " + error.getMessage())
-//                );
+        bootstrapData()
+                .subscribe(
+                        result -> log.info("Bootstrap complete " + result),
+                        error -> log.error("Bootstrap failed " + error.getMessage())
+                );
     }
 
     private Mono<String> bootstrapData() {
-        return productRepository.count().flatMap(count -> {
-            if (count == 0) {
-                try {
-                    List<Product> productList = readDataProductFile();
-                    return productRepository.saveAll(productList)
-                            .then(Mono.just("Set update success"));
-                } catch (Exception e) {
-                    log.error("BD000-1: Loi khi thuc hien doc data");
-                    return Mono.error(new RuntimeException("BD000-1: Loi khi doc file csv"));
-                }
-            } else {
-                return Mono.just("Database already contains data, skipping bootstrap");
-            }
-        });
+        return categoryRepository.count()
+                .flatMap(count -> {
+                    if (count == 0) {
+                        return loadCategories()
+                                .flatMap(this::loadProducts)
+                                .flatMap(this::loadDescriptions)
+                                .then(Mono.just("Data bootstrap success"));
+                    } else {
+                        return Mono.just("Database already contains data, skipping bootstrap");
+                    }
+                });
     }
 
-    private List<Product> readDataProductFile() {
-        List<Product> productList = new ArrayList<>();
-        try (InputStream inputStream = new ClassPathResource(productCsvFilePath).getInputStream();
-             Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)
-        ) {
-            CSVParser recordIterator = CSVFormat.RFC4180.parse(reader);
+    private <T> Flux<T> readCSVFile(String filePath, Function<CSVRecord, T> mapper, Class<T> clazz) {
+        return DataBufferUtils.readInputStream(() -> {
+                        try {
+                            return new ClassPathResource(filePath).getInputStream();
+                        } catch (IOException e) {
+                            throw new RuntimeException("Load file error: " + productRepository, e);
+                        }
+                    },
+                    new DefaultDataBufferFactory(),
+                    4096
+                )
+                .reduce(new ByteArrayOutputStream(), (byteArrayOutputStream, dataBuffer) -> {
+                    try {
+                        byte[] bytes = new byte[dataBuffer.readableByteCount()];
+                        dataBuffer.read(bytes);
+                        byteArrayOutputStream.write(bytes);
+                        return byteArrayOutputStream;
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                })
+                .map(byteArrayOutputStream -> new ByteArrayInputStream(byteArrayOutputStream.toByteArray()))
+                .flatMapMany(byteArrayInputStream -> {
+                    try {
+                        Reader reader = new InputStreamReader(byteArrayInputStream, StandardCharsets.UTF_8);
+                        CSVParser csvParser = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(reader);
+                        return Flux.fromIterable(csvParser.getRecords());
+                    } catch (IOException e) {
+                        return Flux.error(new RuntimeException("Error parsing CSV file: ", e));
+                    }
+                })
+                .map(mapper)
+                .subscribeOn(Schedulers.boundedElastic());
+    }
 
-            recordIterator.stream().forEach(record -> {
-                String name = record.get("name");
-                System.out.println(name);
-            });
+    /**
+     * Đọc danh sách category, sinh ID mới, lưu vào database và trả về Map oldId -> newId.
+     */
+    private Mono<Map<Long, Long>> loadCategories() {
+        return readCSVFile(categoryCsvFilePath, this::toCategory, Category.class)
+                .map(category -> {
+                    Long newId = snowflakeIdGenerator.generateId();
+                    return Category.builder()
+                            .id(newId)
+                            .slug(category.getSlug())
+                            .name(category.getName())
+                            .image(category.getImage())
+                            .status(category.getStatus())
+                            .build();
+                })
+                .collectList()
+                .flatMap(categories -> categoryRepository.saveAll(categories)
+                        .then(Mono.just(
+                                categories.stream().collect(Collectors.toMap(Category::getId, Category::getId))
+                        )));
+    }
 
+    /**
+     * Đọc danh sách product, gán ID mới, cập nhật categoryId theo ID mới.
+     */
+    private Mono<Map<Long, Long>> loadProducts(Map<Long, Long> categoryIdMap) {
+        return readCSVFile(productCsvFilePath, this::toProduct, Product.class)
+                .map(product -> {
+                    Long newId = snowflakeIdGenerator.generateId();
+                    Long newCategoryId = categoryIdMap.getOrDefault(product.getCategoryId(), null);
 
-        } catch (IOException e) {
-            log.error("RDPF000-1: Loi khi doc file: {}", e.getMessage());
-            throw new RuntimeException(e);
-        }
-        return productList;
+                    return Product.builder()
+                            .id(newId)
+                            .categoryId(newCategoryId)
+                            .name(product.getName())
+                            .slug(product.getSlug())
+                            .unit(product.getUnit())
+                            .originalPrice(product.getOriginalPrice())
+                            .salePrice(product.getSalePrice())
+                            .expiryPeriod(product.getExpiryPeriod())
+                            .status(product.getStatus())
+                            .build();
+                })
+                .collectList()
+                .flatMap(products -> productRepository.saveAll(products)
+                        .then(Mono.just(
+                                products.stream().collect(Collectors.toMap(Product::getId, Product::getId))
+                        )));
+    }
+
+    /**
+     * Đọc danh sách description, cập nhật productId theo ID mới.
+     */
+    private Mono<Void> loadDescriptions(Map<Long, Long> productIdMap) {
+        return readCSVFile(descriptionCsvFilePath, this::toDescription, Description.class)
+                .map(description -> {
+                    Long newId = snowflakeIdGenerator.generateId();
+                    Long newProductId = productIdMap.getOrDefault(description.getProductId(), null);
+
+                    return Description.builder()
+                            .id(newId)
+                            .productId(newProductId)
+                            .certificate(description.getCertificate())
+                            .origin(description.getOrigin())
+                            .uses(description.getUses())
+                            .instructionsForUse(description.getInstructionsForUse())
+                            .preservingInstruction(description.getPreservingInstruction())
+                            .expiry(description.getExpiry())
+                            .build();
+                })
+                .collectList()
+                .flatMap(entities -> descriptionRepository.saveAll(entities)
+                        .then());
+    }
+
+    private Product toProduct(CSVRecord record) {
+        return Product.builder()
+                .id(DataUtils.safeToLong(record.get(0)))
+                .categoryId(DataUtils.safeToLong(record.get(1)))
+                .slug(record.get(2))
+                .unit(record.get(4))
+                .name(record.get(3))
+                .originalPrice(DataUtils.safeToBigDecimal(record.get(5)))
+                .salePrice(DataUtils.safeToBigDecimal(record.get(5)))
+                .expiryPeriod(DataUtils.safeToInt(record.get(7)))
+                .status(StatusEnum.ACTIVE)
+                .build();
+    }
+
+    private Category toCategory(CSVRecord record) {
+        return Category.builder()
+                .id(DataUtils.safeToLong(record.get(0)))
+                .slug(record.get(1))
+                .name(record.get(2))
+                .image(record.get(3))
+                .status(StatusEnum.ACTIVE)
+                .build();
+    }
+
+    private Description toDescription(CSVRecord record) {
+        return Description.builder()
+                .id(DataUtils.safeToLong(record.get(0)))
+                .productId(DataUtils.safeToLong(record.get(1)))
+                .certificate(record.get(2))
+                .origin(record.get(3))
+                .uses(record.get(4))
+                .instructionsForUse(record.get(5))
+                .preservingInstruction(record.get(6))
+                .expiry(record.get(7))
+                .build();
     }
 }

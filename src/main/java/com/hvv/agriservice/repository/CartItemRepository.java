@@ -4,8 +4,6 @@ import com.hvv.agriservice.entity.CartItem;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface CartItemRepository extends ReactiveCrudRepository<CartItem, UUID> {
+public interface CartItemRepository extends ReactiveCrudRepository<CartItem, Long> {
 }

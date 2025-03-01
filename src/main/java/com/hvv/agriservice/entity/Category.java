@@ -18,8 +18,6 @@ public class Category {
     @Id
     @Column("id")
     private Long id;
-    @Column("parent_id")
-    private Long parentId;              // Danh muc cha neu co
     @Column("name")
     private String name;                // Ten danh muc
     @Column("slug")

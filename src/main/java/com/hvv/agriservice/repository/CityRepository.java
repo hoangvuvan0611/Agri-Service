@@ -4,8 +4,6 @@ import com.hvv.agriservice.entity.City;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface CityRepository extends ReactiveCrudRepository<City, UUID> {
+public interface CityRepository extends ReactiveCrudRepository<City, Long> {
 }
