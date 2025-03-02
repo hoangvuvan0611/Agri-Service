@@ -1,1 +1,0 @@
-alter table categories drop column parent_id;

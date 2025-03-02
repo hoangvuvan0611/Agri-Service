@@ -21,15 +21,16 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.reactive.TransactionalOperator;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 public class DataBootstrap implements CommandLineRunner {
@@ -38,14 +39,16 @@ public class DataBootstrap implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final SnowflakeIdGenerator snowflakeIdGenerator;
     private final DescriptionRepository descriptionRepository;
+    private final TransactionalOperator transactionalOperator;
 
     Logger log = LoggerFactory.getLogger(DataBootstrap.class);
 
-    public DataBootstrap(ProductRepository productRepository, CategoryRepository categoryRepository, SnowflakeIdGenerator snowflakeIdGenerator, DescriptionRepository descriptionRepository) {
+    public DataBootstrap(ProductRepository productRepository, CategoryRepository categoryRepository, SnowflakeIdGenerator snowflakeIdGenerator, DescriptionRepository descriptionRepository, TransactionalOperator transactionalOperator) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.snowflakeIdGenerator = snowflakeIdGenerator;
         this.descriptionRepository = descriptionRepository;
+        this.transactionalOperator = transactionalOperator;
     }
 
     String productCsvFilePath;
@@ -59,7 +62,7 @@ public class DataBootstrap implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         bootstrapData()
                 .subscribe(
                         result -> log.info("Bootstrap complete " + result),
@@ -67,14 +70,16 @@ public class DataBootstrap implements CommandLineRunner {
                 );
     }
 
-    private Mono<String> bootstrapData() {
+    public Mono<String> bootstrapData() {
         return categoryRepository.count()
                 .flatMap(count -> {
                     if (count == 0) {
-                        return loadCategories()
-                                .flatMap(this::loadProducts)
-                                .flatMap(this::loadDescriptions)
-                                .then(Mono.just("Data bootstrap success"));
+                        return transactionalOperator.transactional(
+                                loadCategories()
+                                        .flatMap(this::loadProducts)
+                                        .flatMap(this::loadDescriptions)
+                                        .then(Mono.just("Data bootstrap success"))
+                        );
                     } else {
                         return Mono.just("Database already contains data, skipping bootstrap");
                     }
@@ -120,33 +125,37 @@ public class DataBootstrap implements CommandLineRunner {
      * Đọc danh sách category, sinh ID mới, lưu vào database và trả về Map oldId -> newId.
      */
     private Mono<Map<Long, Long>> loadCategories() {
+        Map<Long, Long> idMap = new HashMap<>();
         return readCSVFile(categoryCsvFilePath, this::toCategory, Category.class)
                 .map(category -> {
                     Long newId = snowflakeIdGenerator.generateId();
+                    idMap.put(category.getId(), newId);
                     return Category.builder()
                             .id(newId)
                             .slug(category.getSlug())
                             .name(category.getName())
                             .image(category.getImage())
                             .status(category.getStatus())
+                            .isNew(true)
                             .build();
                 })
                 .collectList()
                 .flatMap(categories -> categoryRepository.saveAll(categories)
-                        .then(Mono.just(
-                                categories.stream().collect(Collectors.toMap(Category::getId, Category::getId))
-                        )));
+                        .doOnError(Throwable::printStackTrace)
+                        .then(Mono.just(idMap))
+                );
     }
 
     /**
      * Đọc danh sách product, gán ID mới, cập nhật categoryId theo ID mới.
      */
     private Mono<Map<Long, Long>> loadProducts(Map<Long, Long> categoryIdMap) {
+        Map<Long, Long> idMap = new HashMap<>();
         return readCSVFile(productCsvFilePath, this::toProduct, Product.class)
                 .map(product -> {
                     Long newId = snowflakeIdGenerator.generateId();
+                    idMap.put(product.getId(), newId);
                     Long newCategoryId = categoryIdMap.getOrDefault(product.getCategoryId(), null);
-
                     return Product.builder()
                             .id(newId)
                             .categoryId(newCategoryId)
@@ -157,13 +166,13 @@ public class DataBootstrap implements CommandLineRunner {
                             .salePrice(product.getSalePrice())
                             .expiryPeriod(product.getExpiryPeriod())
                             .status(product.getStatus())
+                            .isNew(true)
                             .build();
                 })
                 .collectList()
                 .flatMap(products -> productRepository.saveAll(products)
-                        .then(Mono.just(
-                                products.stream().collect(Collectors.toMap(Product::getId, Product::getId))
-                        )));
+                        .doOnError(Throwable::printStackTrace)
+                        .then(Mono.just(idMap)));
     }
 
     /**
@@ -184,10 +193,12 @@ public class DataBootstrap implements CommandLineRunner {
                             .instructionsForUse(description.getInstructionsForUse())
                             .preservingInstruction(description.getPreservingInstruction())
                             .expiry(description.getExpiry())
+                            .isNew(true)
                             .build();
                 })
                 .collectList()
                 .flatMap(entities -> descriptionRepository.saveAll(entities)
+                        .doOnError(Throwable::printStackTrace)
                         .then());
     }
 

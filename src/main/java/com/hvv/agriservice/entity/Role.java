@@ -3,6 +3,8 @@ package com.hvv.agriservice.entity;
 import com.hvv.agriservice.constant.enums.RoleEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -17,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "roles")
-public class Role {
+public class Role implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -33,4 +35,6 @@ public class Role {
     private LocalDateTime updatedAt;                        // Thời gian cập nhật thông tin vai trò
     @Column("updated_by")
     private String updatedBy;                                 // Người cập nhật vai trò
+    @Transient
+    private boolean isNew;
 }

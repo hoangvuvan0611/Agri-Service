@@ -2,6 +2,8 @@ package com.hvv.agriservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -14,7 +16,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "delivery_info")
-public class DeliveryInfo {
+public class DeliveryInfo implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -29,5 +31,7 @@ public class DeliveryInfo {
     @Column("district_id")
     private Long districtId;                    // Id quan huyen cua khach hang
     @Column("ward_id")
-    private Long wardId;                          // Id xa phuong
+    private Long wardId;                        // Id xa phuong
+    @Transient
+    private boolean isNew;
 }

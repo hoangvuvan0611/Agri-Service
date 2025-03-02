@@ -2,6 +2,8 @@ package com.hvv.agriservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -17,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -35,4 +37,6 @@ public class User {
     private LocalDateTime updatedAt;                    // Thời gian cập nhật user
     @Column("updated_by")
     private String updatedBy;                             // Người cập nhật user
+    @Transient
+    private boolean isNew;
 }

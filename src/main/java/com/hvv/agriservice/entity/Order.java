@@ -3,6 +3,8 @@ package com.hvv.agriservice.entity;
 import com.hvv.agriservice.constant.enums.OrderStatusEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -18,7 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
-public class Order {
+public class Order implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -48,4 +50,6 @@ public class Order {
     private LocalDateTime deliveryAt;               // Thoi diem giao hang cho don vi van chuyen
     @Column("updated_at")
     private LocalDateTime updatedAt;                // Thoi gian cập nhật
+    @Transient
+    private boolean isNew;
 }

@@ -2,6 +2,8 @@ package com.hvv.agriservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "reviews")
-public class Review {
+public class Review implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -36,4 +38,6 @@ public class Review {
     private LocalDateTime createdAt;                // Thời gian tạo đánh giá
     @Column("updated_at")
     private LocalDateTime updatedAt;                // Thời gian cập nhật đánh giá
+    @Transient
+    private boolean isNew;
 }

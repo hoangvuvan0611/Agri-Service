@@ -4,6 +4,8 @@ import com.hvv.agriservice.constant.enums.CouponTypeEnum;
 import com.hvv.agriservice.constant.enums.StatusEnum;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -19,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "coupons")
-public class Coupon {
+public class Coupon implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -51,4 +53,6 @@ public class Coupon {
     private LocalDateTime updatedAt;            // Thời gian cập nhật thông tin phiếu giảm giá
     @Column("updated_by")
     private String updatedBy;                     // User cập nhật phiếu giảm giá
+    @Transient
+    private boolean isNew;
 }

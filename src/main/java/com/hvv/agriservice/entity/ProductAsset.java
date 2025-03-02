@@ -2,6 +2,8 @@ package com.hvv.agriservice.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -11,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "product_asset")
-public class ProductAsset {
+public class ProductAsset implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
@@ -21,4 +23,6 @@ public class ProductAsset {
     private Long assetId;                       // Id của asset
     @Column("type")
     private String type;
+    @Transient
+    private boolean isNew;
 }
