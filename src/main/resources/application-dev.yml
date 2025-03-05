@@ -25,3 +25,10 @@ logging:
         data.r2dbc: DEBUG
     io.r2dbc.postgresql.QUERY: DEBUG
     io.r2dbc.postgresql.PARAM: DEBUG
+
+
+minio:
+  endpoint: http://116.104.51.101:8080
+  access-key: admin
+  secret-key: admin123
+  bucket-name: agri-shop
