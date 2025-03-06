@@ -28,7 +28,7 @@ public interface MinioService {
      * @param fileName
      * @return
      */
-    Mono<String> getFileUrl(String fileName);
+    Mono<String> getPreSignedUrl(String fileName);
 
     Flux<Bucket> getAllBuckets();
 }

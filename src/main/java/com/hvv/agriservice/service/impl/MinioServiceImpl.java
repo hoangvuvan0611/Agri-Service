@@ -105,14 +105,14 @@ public class MinioServiceImpl implements MinioService {
     }
 
     @Override
-    public Mono<String> getFileUrl(String fileName) {
+    public Mono<String> getPreSignedUrl(String fileName) {
         return Mono.fromCallable(() ->
             minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
                     .method(Method.GET)
                     .bucket(bucketName)
                     .object(fileName)
-                    .expiry(24*60*60)
+                    .expiry(24*60*60)   // Het han sau 24h
                     .build()
             )
         );
