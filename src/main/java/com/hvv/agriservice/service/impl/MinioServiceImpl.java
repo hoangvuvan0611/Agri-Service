@@ -29,6 +29,8 @@ public class MinioServiceImpl implements MinioService {
 
     @Value("${minio.bucket-name}")
     private String bucketName;
+    @Value("${minio.endpoint}")
+    private String endpoint;
 
     @Override
     public Mono<Void> createBucketIfNotExists() {
@@ -116,6 +118,11 @@ public class MinioServiceImpl implements MinioService {
                     .build()
             )
         );
+    }
+
+    @Override
+    public Mono<String> getDirectObjectUrl(String objectName) {
+        return Mono.fromCallable(() -> String.format("%s/%s/%s", endpoint, bucketName, objectName));
     }
 
     @Override

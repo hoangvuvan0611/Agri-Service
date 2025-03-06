@@ -30,5 +30,12 @@ public interface MinioService {
      */
     Mono<String> getPreSignedUrl(String fileName);
 
+    /**
+     * Lay url dan truc tiep toi image
+     * @param objectName
+     * @return
+     */
+    Mono<String> getDirectObjectUrl(String objectName);
+
     Flux<Bucket> getAllBuckets();
 }

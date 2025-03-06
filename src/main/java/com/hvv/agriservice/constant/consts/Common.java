@@ -82,4 +82,8 @@ public class Common {
     public interface WardPath {
         String WARD_PATH = "/ward";
     }
+
+    public interface FilePath {
+        String FILE_PATH = "/file";
+    }
 }
