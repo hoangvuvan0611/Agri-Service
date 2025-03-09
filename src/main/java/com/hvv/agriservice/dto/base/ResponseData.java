@@ -15,7 +15,7 @@ public class ResponseData<T> {
     private T data;
 
     public static <T> ResponseData<T> success(String message, T data) {
-        return new ResponseData<>(200, TranslatorUtils.toLocale(message), data);
+        return new ResponseData<>(200, message, data);
     }
 
     public static <T> ResponseData<T> error(int status, String message) {

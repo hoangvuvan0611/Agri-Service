@@ -32,3 +32,8 @@ minio:
   access-key: admin
   secret-key: admin123
   bucket-name: agri-shop
+
+
+webClient:
+  recommendation:
+    url: http://localhost:5000

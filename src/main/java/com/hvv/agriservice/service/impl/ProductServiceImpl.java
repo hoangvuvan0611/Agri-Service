@@ -1,10 +1,36 @@
 package com.hvv.agriservice.service.impl;
 
+import com.hvv.agriservice.dto.model.ProductDTO;
+import com.hvv.agriservice.dto.model.RecommendationIdProductDTO;
+import com.hvv.agriservice.repository.ProductRepository;
 import com.hvv.agriservice.service.ProductService;
+import com.hvv.agriservice.service.RecommendationService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
-@Slf4j
+
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
+
+    private final RecommendationService recommendationService;
+
+    private final ProductRepository productRepository;
+
+    @Override
+    public Flux<Long> getRecommendationsIdById(Long id) {
+        return recommendationService.getRecommendationsByProductId(id)
+                .map(RecommendationIdProductDTO::getId);
+    }
+
+    @Override
+    public Flux<ProductDTO> getRecommendationsProductById(Long id) {
+        return recommendationService.getRecommendationsByProductId(id)
+                .map(RecommendationIdProductDTO::getId)
+                .collectList()
+                .filter(ids -> !ids.isEmpty())
+                .flatMapMany(productRepository::getRecommendationsProductById);
+    }
 }
