@@ -20,6 +20,8 @@ public class Assets implements Persistable<Long> {
     @Id
     @Column("id")
     private Long id;
+    @Column("product_id")
+    private Long productId;
     @Column("filename")
     private String filename;                    // Tên file
     @Column("path")

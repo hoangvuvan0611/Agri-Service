@@ -3,9 +3,11 @@ package com.hvv.agriservice.bootstrap;
 import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
 import com.hvv.agriservice.constant.consts.Common;
 import com.hvv.agriservice.constant.enums.StatusEnum;
+import com.hvv.agriservice.entity.Assets;
 import com.hvv.agriservice.entity.Category;
 import com.hvv.agriservice.entity.Description;
 import com.hvv.agriservice.entity.Product;
+import com.hvv.agriservice.repository.AssetRepository;
 import com.hvv.agriservice.repository.CategoryRepository;
 import com.hvv.agriservice.repository.DescriptionRepository;
 import com.hvv.agriservice.repository.ProductRepository;
@@ -29,6 +31,7 @@ import reactor.core.scheduler.Schedulers;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -39,15 +42,17 @@ public class DataBootstrap implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final SnowflakeIdGenerator snowflakeIdGenerator;
     private final DescriptionRepository descriptionRepository;
+    private final AssetRepository assetRepository;
     private final TransactionalOperator transactionalOperator;
 
     Logger log = LoggerFactory.getLogger(DataBootstrap.class);
 
-    public DataBootstrap(ProductRepository productRepository, CategoryRepository categoryRepository, SnowflakeIdGenerator snowflakeIdGenerator, DescriptionRepository descriptionRepository, TransactionalOperator transactionalOperator) {
+    public DataBootstrap(ProductRepository productRepository, CategoryRepository categoryRepository, SnowflakeIdGenerator snowflakeIdGenerator, DescriptionRepository descriptionRepository, AssetRepository assetRepository, TransactionalOperator transactionalOperator) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.snowflakeIdGenerator = snowflakeIdGenerator;
         this.descriptionRepository = descriptionRepository;
+        this.assetRepository = assetRepository;
         this.transactionalOperator = transactionalOperator;
     }
 
@@ -171,8 +176,38 @@ public class DataBootstrap implements CommandLineRunner {
                 })
                 .collectList()
                 .flatMap(products -> productRepository.saveAll(products)
+                        .collectList()
+                        .flatMap(this::saveProductImages)
                         .doOnError(Throwable::printStackTrace)
                         .then(Mono.just(idMap)));
+    }
+
+    /**
+     * Luu danh sach anh cho san pham
+     */
+    private Mono<Void> saveProductImages(List<Product> productList) {
+        return Flux.fromIterable(productList)
+                .flatMap(product -> {
+                    String slug = product.getSlug();
+                    Long productId = product.getId();
+
+                    return Mono.fromCallable(() -> {
+                        Long assetsId = snowflakeIdGenerator.generateId();
+                        String imagePath = slug + ".webp";
+                        return Assets.builder()
+                                .id(assetsId)
+                                .filename(slug)
+                                .path(imagePath)
+                                .productId(productId)
+                                .isNew(true)
+                                .build();
+                    });
+                })
+                .subscribeOn(Schedulers.boundedElastic())
+                .collectList()
+                .flatMapMany(assetRepository::saveAll)
+                .doOnError(Throwable::printStackTrace)
+                .then();
     }
 
     /**

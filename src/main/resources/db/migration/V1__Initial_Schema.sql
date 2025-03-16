@@ -121,24 +121,14 @@ CREATE INDEX idx_customers_district ON customers(district_id);
 -- Tạo bảng assets và index
 CREATE TABLE IF NOT EXISTS assets (
     id BIGINT PRIMARY KEY NOT NULL,
-    filename VARCHAR(50) NOT NULL,
-    path VARCHAR(100),
-    type VARCHAR(50) NOT NULL,
+    filename VARCHAR(250) NOT NULL,
+    product_id BIGINT NOT NULL REFERENCES products(id),
+    path VARCHAR(250),
+    type VARCHAR(50),
     size BIGINT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX idx_assets_type ON assets(type);
-
--- Tạo bảng product_asset và index
-CREATE TABLE IF NOT EXISTS product_asset (
-    id BIGINT PRIMARY KEY NOT NULL,
-    product_id BIGINT NOT NULL REFERENCES products(id),
-    asset_id BIGINT NOT NULL REFERENCES assets(id),
-    type VARCHAR(50) NOT NULL
-);
-CREATE INDEX idx_product_asset_product ON product_asset(product_id);
-CREATE INDEX idx_product_asset_asset ON product_asset(asset_id);
 
 -- Tạo bảng carts và index
 CREATE TABLE IF NOT EXISTS carts (

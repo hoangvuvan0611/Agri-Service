@@ -4,6 +4,7 @@ public class Common {
     public static final String ALL = "/all";
     public static final String UPDATE = "/update";
     public static final String CREATE = "/create";
+    public static final String ID = "/{id}";
 
     public interface UrlCommon {
         String PRODUCT_CSV_PATH = "metadata/Product.csv";
@@ -17,6 +18,8 @@ public class Common {
 
     public interface ProductPath {
         String PRODUCT_PATH = "/product";
+        String GET_RECOMMENDATION_IDS_BY_ID = "/recommend_ids/{id}";
+        String GET_RECOMMENDATION_PRODUCTS_BY_ID = "/recommend_products/{id}";
     }
 
     public interface AssetPath {
