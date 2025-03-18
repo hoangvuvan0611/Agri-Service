@@ -14,6 +14,7 @@ public class ProductDTO {
     private String name;
     private String slug;
     private String uses;
+    private String path;
     private String description;
     private BigDecimal originalPrice;
     private BigDecimal salePrice;

@@ -12,6 +12,7 @@ import static com.hvv.agriservice.constant.consts.Common.*;
 import static com.hvv.agriservice.constant.consts.Common.ProductPath.*;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping(path = PRODUCT_PATH)
 @RequiredArgsConstructor
@@ -52,7 +53,14 @@ public class ProductController {
      * @return
      */
     @GetMapping(path = ALL)
-    public ResponseEntity<?> getAll() {return null;}
+    public Mono<ResponseData<?>> getAll(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ) {
+        return productService.findAllByPage(page, size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
 
     /**
      * Lay dang sach id cua san pham tuong tu cua 1 san pham theo id
@@ -82,8 +90,13 @@ public class ProductController {
      * Ham goi lay danh sach san pham de show o trang chu
      * @return
      */
-    @GetMapping()
-    public Mono<ResponseData<?>> getProductsToShowInit() {
-        return null;
+    @GetMapping("/showInit")
+    public Mono<ResponseData<?>> getProductsToShowInit(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size
+    ) {
+        return productService.getProductsToShowInit(page, size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
     }
 }
