@@ -12,8 +12,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-import static com.hvv.agriservice.repository.CustomQuery.getProductsToShowInit;
-import static com.hvv.agriservice.repository.CustomQuery.getRecommendationProductsByProductId;
+import static com.hvv.agriservice.repository.CustomQuery.*;
 
 @Repository
 public interface ProductRepository extends ReactiveCrudRepository<Product, Long>, ReactiveSortingRepository<Product, Long> {
@@ -29,4 +28,7 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
 
     @Query(getProductsToShowInit)
     Flux<ProductDTO> getProductsToShowInit(int offset, int size);
+
+    @Query(getProductBySlug)
+    Mono<ProductDTO> getProductBySlug(String slug);
 }

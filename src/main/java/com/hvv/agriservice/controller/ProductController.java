@@ -90,7 +90,7 @@ public class ProductController {
      * Ham goi lay danh sach san pham de show o trang chu
      * @return
      */
-    @GetMapping("/showInit")
+    @GetMapping(path = GET_PRODUCTS_SHOW_INIT)
     public Mono<ResponseData<?>> getProductsToShowInit(
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "10") int size
@@ -98,5 +98,15 @@ public class ProductController {
         return productService.getProductsToShowInit(page, size)
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
+
+    /**
+     * Ham thuc hien lay thong tin san pham theo truong slug
+     * @return
+     */
+    @GetMapping(path = GET_PRODUCT_BY_SLUG)
+    public Mono<ResponseData<?>> getProductsBySlug(@PathVariable String slug) {
+        return productService.getProductBySLug(slug)
+                .map(productDTO -> ResponseData.success("", productDTO));
     }
 }

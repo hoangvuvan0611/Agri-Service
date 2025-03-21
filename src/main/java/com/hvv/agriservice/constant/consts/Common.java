@@ -20,6 +20,8 @@ public class Common {
         String PRODUCT_PATH = "/product";
         String GET_RECOMMENDATION_IDS_BY_ID = "/recommend_ids/{id}";
         String GET_RECOMMENDATION_PRODUCTS_BY_ID = "/recommend_products/{id}";
+        String GET_PRODUCTS_SHOW_INIT = "/showInit";
+        String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
     }
 
     public interface AssetPath {
