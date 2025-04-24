@@ -1,6 +1,6 @@
-package com.hvv.agriservice.constant.consts;
+package com.hvv.agriservice.constant;
 
-public class Common {
+public class Const {
     public static final String ALL = "/all";
     public static final String UPDATE = "/update";
     public static final String CREATE = "/create";
@@ -22,6 +22,11 @@ public class Common {
         String GET_RECOMMENDATION_PRODUCTS_BY_ID = "/recommend_products/{id}";
         String GET_PRODUCTS_SHOW_INIT = "/showInit";
         String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
+        String GET_TOTAL = "/total";
+    }
+
+    public interface Common {
+        String GET_MANAGEMENT = "/showManagement";
     }
 
     public interface AssetPath {

@@ -1,6 +1,7 @@
 package com.hvv.agriservice.repository;
 
 import com.hvv.agriservice.dto.model.ProductDTO;
+import com.hvv.agriservice.dto.model.ProductManagementDTO;
 import com.hvv.agriservice.entity.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
@@ -31,4 +32,10 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
 
     @Query(getProductBySlug)
     Mono<ProductDTO> getProductBySlug(String slug);
+
+    @Query(getCountAllProduct)
+    Mono<Long> getTotal();
+
+    @Query(getProductToShowManagement)
+    Flux<ProductManagementDTO> getProductToShowManagement(int offset, int size);
 }

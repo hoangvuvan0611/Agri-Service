@@ -26,6 +26,8 @@ public class District implements Persistable<Long> {
     private String name;                        // Ten quan huyen
     @Column("postal_code")
     private String postalCode;                  // Ma buu dien cua quan huyen
+    @Column("city_id")
+    private Long cityId;
     @Column("created_at")
     private LocalDateTime createdAt;            // Thoi gian tao moi
     @Column("created_by")

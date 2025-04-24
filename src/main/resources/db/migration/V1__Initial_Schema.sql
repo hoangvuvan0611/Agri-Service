@@ -75,6 +75,7 @@ CREATE INDEX idx_cities_name ON cities(name);
 CREATE TABLE IF NOT EXISTS districts (
     id BIGINT PRIMARY KEY NOT NULL,
     name VARCHAR(100),
+    city_id BIGINT,
     postal_code VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(50),
@@ -88,6 +89,7 @@ CREATE INDEX idx_districts_name ON districts(name);
 CREATE TABLE IF NOT EXISTS wards (
     id BIGINT PRIMARY KEY NOT NULL,
     name VARCHAR(50) NOT NULL,
+    district_id BIGINT,
     postal_code VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(50),
@@ -313,4 +315,14 @@ CREATE TABLE IF NOT EXISTS descriptions (
     created_by VARCHAR(50),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(50)
+);
+
+-- Luu tru hanh vi thao tac voi trang web cua nguoi dung
+CREATE TABLE IF NOT EXISTS collaboratives (
+    id BIGINT PRIMARY KEY NOT NULL,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    action_type TEXT NOT NULL,
+    action_value TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

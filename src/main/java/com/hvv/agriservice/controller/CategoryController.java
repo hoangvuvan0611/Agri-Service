@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.hvv.agriservice.constant.consts.Common.*;
+import static com.hvv.agriservice.constant.Const.*;
 
 @Slf4j
 @RestController

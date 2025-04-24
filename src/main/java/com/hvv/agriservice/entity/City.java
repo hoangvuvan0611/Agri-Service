@@ -34,6 +34,6 @@ public class City implements Persistable<Long> {
     private LocalDateTime updatedAt;            // Thoi gian cap nhat
     @Column("updated_by")
     private String updatedBy;                     // Nguoi cap nhat thong tin
-    @Transient
+     @Transient
     private boolean isNew;
 }

@@ -1,7 +1,7 @@
 package com.hvv.agriservice.bootstrap;
 
 import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
-import com.hvv.agriservice.constant.consts.Common;
+import com.hvv.agriservice.constant.Const;
 import com.hvv.agriservice.constant.enums.StatusEnum;
 import com.hvv.agriservice.entity.Assets;
 import com.hvv.agriservice.entity.Category;
@@ -61,9 +61,9 @@ public class DataBootstrap implements CommandLineRunner {
     String descriptionCsvFilePath;
     @PostConstruct
     private void init() {
-        productCsvFilePath = Common.UrlCommon.PRODUCT_CSV_PATH;
-        categoryCsvFilePath = Common.UrlCommon.CATEGORY_CSV_PATH;
-        descriptionCsvFilePath = Common.UrlCommon.DESCRIPTION_CSV_PATH;
+        productCsvFilePath = Const.UrlCommon.PRODUCT_CSV_PATH;
+        categoryCsvFilePath = Const.UrlCommon.CATEGORY_CSV_PATH;
+        descriptionCsvFilePath = Const.UrlCommon.DESCRIPTION_CSV_PATH;
     }
 
     @Override

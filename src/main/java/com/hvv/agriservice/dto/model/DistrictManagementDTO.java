@@ -3,25 +3,23 @@ package com.hvv.agriservice.dto.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Column;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class DistrictManagementDTO {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     private String name;
-    private String slug;
-    private String uses;
-    private String path;
-    private String description;
-    private BigDecimal originalPrice;
-    private BigDecimal salePrice;
-    private Long quantity;
-    private Long sold;
-    private Boolean featured;
+    private String postalCode;
+    private String cityName;
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime updatedAt;
+    private String updatedBy;
 }

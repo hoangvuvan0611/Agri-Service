@@ -8,8 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import static com.hvv.agriservice.constant.consts.Common.*;
-import static com.hvv.agriservice.constant.consts.Common.ProductPath.*;
+import static com.hvv.agriservice.constant.Const.*;
+import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
+import static com.hvv.agriservice.constant.Const.ProductPath.*;
 
 @Slf4j
 @CrossOrigin
@@ -108,5 +109,21 @@ public class ProductController {
     public Mono<ResponseData<?>> getProductsBySlug(@PathVariable String slug) {
         return productService.getProductBySLug(slug)
                 .map(productDTO -> ResponseData.success("", productDTO));
+    }
+
+    @GetMapping(path = GET_TOTAL)
+    public Mono<ResponseData<?>> getTotal() {
+        return productService.getTotal()
+                .map(countAll -> ResponseData.success("", countAll));
+    }
+
+    @GetMapping(path = GET_MANAGEMENT)
+    public Mono<ResponseData<?>> getProductToShowManagement(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ) {
+        return productService.getProductToShowManagement(page, size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
     }
 }

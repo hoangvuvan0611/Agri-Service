@@ -11,17 +11,15 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class ProductManagementDTO {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
     private String name;
-    private String slug;
-    private String uses;
-    private String path;
-    private String description;
     private BigDecimal originalPrice;
     private BigDecimal salePrice;
+    private String category;
     private Long quantity;
     private Long sold;
-    private Boolean featured;
+    private Long stock;
+    private String status;
 }

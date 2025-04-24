@@ -1,6 +1,6 @@
 package com.hvv.agriservice.controller;
 
-import static com.hvv.agriservice.constant.consts.Common.*;
+import static com.hvv.agriservice.constant.Const.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

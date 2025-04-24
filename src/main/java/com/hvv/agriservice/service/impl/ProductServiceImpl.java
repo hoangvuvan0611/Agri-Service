@@ -2,6 +2,7 @@ package com.hvv.agriservice.service.impl;
 
 import com.hvv.agriservice.core.mapstruct.ProductMapper;
 import com.hvv.agriservice.dto.model.ProductDTO;
+import com.hvv.agriservice.dto.model.ProductManagementDTO;
 import com.hvv.agriservice.dto.model.RecommendationIdProductDTO;
 import com.hvv.agriservice.repository.ProductRepository;
 import com.hvv.agriservice.service.ProductService;
@@ -52,5 +53,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Mono<ProductDTO> getProductBySLug(String slug) {
         return productRepository.getProductBySlug(slug);
+    }
+
+    @Override
+    public Mono<Long> getTotal() {
+        return productRepository.getTotal();
+    }
+
+    @Override
+    public Flux<ProductManagementDTO> getProductToShowManagement(int page, int size) {
+        return productRepository.getProductToShowManagement(page*size, size);
     }
 }

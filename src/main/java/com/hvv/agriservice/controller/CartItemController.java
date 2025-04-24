@@ -3,7 +3,7 @@ package com.hvv.agriservice.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.hvv.agriservice.constant.consts.Common.*;
+import static com.hvv.agriservice.constant.Const.*;
 
 @RestController
 @RequestMapping(path = CartItemPath.CART_ITEM_PATH)

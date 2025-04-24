@@ -1,5 +1,7 @@
 package com.hvv.agriservice.dto.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecommendationIdProductDTO {
+    @JsonSerialize(using = ToStringSerializer.class)
     private long id;
 }
