@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import static com.hvv.agriservice.constant.Const.*;
 import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
+import static com.hvv.agriservice.constant.Const.DistrictPath.BY_CITY_ID;
 
 @Slf4j
 @CrossOrigin
@@ -50,5 +51,10 @@ public class DistrictController {
         return districtService.getDistrictToShowManagement(page, size)
                 .collectList()
                 .map(districts -> ResponseData.success("", districts));
+    }
+
+    @GetMapping(path = BY_CITY_ID)
+    public Mono<ResponseData<?>> getDistrictsByCityId(@PathVariable String cityId) {
+        return null;
     }
 }

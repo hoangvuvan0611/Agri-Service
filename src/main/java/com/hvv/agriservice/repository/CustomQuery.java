@@ -42,9 +42,9 @@ public interface CustomQuery {
             "  OFFSET :offset ;";
 
     String getDistrictToShowManagement =
-            "SELECT d.id, d.name, d.postal_code, d.created_at, d.updated_at, c.name as cityName" +
+            "SELECT d.id, d.name, d.postal_code, d.created_at, d.updated_at, c.name as city" +
             "  FROM districts d " +
-            "  JOIN cities c on d.city_id = d.id " +
+            "  JOIN cities c on d.city_id = c.id " +
             "  LIMIT :size " +
             "  OFFSET :offset ;";
 }

@@ -1,6 +1,7 @@
 package com.hvv.agriservice.service.impl;
 
 import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
+import com.hvv.agriservice.dto.model.CityManagementDTO;
 import com.hvv.agriservice.dto.request.CreateCityRequest;
 import com.hvv.agriservice.entity.City;
 import com.hvv.agriservice.repository.CityRepository;
@@ -34,7 +35,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public Flux<City> getCityToShowManagement(int page, int size) {
+    public Flux<CityManagementDTO> getCityToShowManagement(int page, int size) {
         return cityRepository.getProductToShowManagement(page*size, size);
     }
 }
