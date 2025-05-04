@@ -2,6 +2,7 @@ package com.hvv.agriservice.service.impl;
 
 import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
 import com.hvv.agriservice.dto.model.WardManagementDTO;
+import com.hvv.agriservice.dto.model.WardToSelectDTO;
 import com.hvv.agriservice.dto.request.CreateWardRequest;
 import com.hvv.agriservice.entity.Ward;
 import com.hvv.agriservice.repository.WardRepository;
@@ -40,5 +41,10 @@ public class WardServiceImpl implements WardService {
     @Override
     public Flux<WardManagementDTO> getWardToShowManagement(int page, int size) {
         return wardRepository.getWardToShowManagement(size*page, size);
+    }
+
+    @Override
+    public Flux<WardToSelectDTO> getWardsByDistrictId(String districtId) {
+        return wardRepository.getWardsByDistrictId(DataUtils.safeToLong(districtId));
     }
 }

@@ -5,12 +5,14 @@ import com.hvv.agriservice.dto.request.CreateCityRequest;
 import com.hvv.agriservice.service.CityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import static com.hvv.agriservice.constant.Const.*;
 import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
+import static com.hvv.agriservice.constant.Const.Common.GET_SELECT;
 
 @Slf4j
 @CrossOrigin
@@ -48,6 +50,13 @@ public class CityController {
             @RequestParam(name = "size", defaultValue = "20") int size
     ) {
         return cityService.getCityToShowManagement(page, size)
+                .collectList()
+                .map(cities -> ResponseData.success("", cities));
+    }
+
+    @GetMapping(path = GET_SELECT)
+    public Mono<ResponseData<?>> getCitiesToSelect () {
+        return cityService.getCitiesToSelect()
                 .collectList()
                 .map(cities -> ResponseData.success("", cities));
     }

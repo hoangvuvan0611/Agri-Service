@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import static com.hvv.agriservice.constant.Const.*;
 import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
+import static com.hvv.agriservice.constant.Const.WardPath.BY_DISTRICT_ID;
 import static com.hvv.agriservice.constant.Const.WardPath.WARD_PATH;
 
 @Slf4j
@@ -51,5 +52,12 @@ public class WardController {
         return wardService.getWardToShowManagement(page, size)
                 .collectList()
                 .map(wards -> ResponseData.success("", wards));
+    }
+
+    @GetMapping(path = BY_DISTRICT_ID)
+    public Mono<ResponseData<?>> getDistrictsByDistrictId(@PathVariable String districtId) {
+        return wardService.getWardsByDistrictId(districtId)
+                .collectList()
+                .map(districtToSelectDTOS -> ResponseData.success("", districtToSelectDTOS));
     }
 }

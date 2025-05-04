@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import static com.hvv.agriservice.constant.Const.*;
 import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
+import static com.hvv.agriservice.constant.Const.Common.GET_SELECT;
 import static com.hvv.agriservice.constant.Const.DistrictPath.BY_CITY_ID;
 
 @Slf4j

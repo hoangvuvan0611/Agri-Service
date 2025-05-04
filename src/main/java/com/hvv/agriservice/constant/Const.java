@@ -27,6 +27,7 @@ public class Const {
 
     public interface Common {
         String GET_MANAGEMENT = "/showManagement";
+        String GET_SELECT = "/getToSelect";
     }
 
     public interface AssetPath {
@@ -92,6 +93,7 @@ public class Const {
 
     public interface WardPath {
         String WARD_PATH = "/ward";
+        String BY_DISTRICT_ID = "/districtId={districtId}";  // Lya thong tin
     }
 
     public interface FilePath {

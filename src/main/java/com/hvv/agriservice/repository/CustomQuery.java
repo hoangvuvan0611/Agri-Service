@@ -55,6 +55,16 @@ public interface CustomQuery {
             " JOIN cities c on c.id = d.city_id" +
             " LIMIT :size " +
             " OFFSET :offset ;";
+
+    String getWardByDistrictIdToSelect =
+            "SELECT w.id, w.name " +
+            " FROM wards w " +
+            " JOIN districts d on d.id = w.district_id " +
+            " WHERE w.district_id = :districtId";
+
+    String getCitiesToSelect =
+            "SELECT c.id, c.name " +
+            "FROM cities c ";
 }
 
 
