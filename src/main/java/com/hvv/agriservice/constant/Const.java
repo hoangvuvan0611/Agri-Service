@@ -71,7 +71,7 @@ public class Const {
 
     public interface DistrictPath {
         String DISTRICT_PATH = "/district";
-        String BY_CITY_ID = "/byCityId={cityId}";  // Lya thong tin
+        String BY_CITY_ID = "/cityId={cityId}";  // Lya thong tin
     }
 
     public interface OrderItemPath {

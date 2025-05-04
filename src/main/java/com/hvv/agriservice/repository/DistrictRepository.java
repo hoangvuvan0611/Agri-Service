@@ -1,6 +1,7 @@
 package com.hvv.agriservice.repository;
 
 import com.hvv.agriservice.dto.model.DistrictManagementDTO;
+import com.hvv.agriservice.dto.model.DistrictToSelectDTO;
 import com.hvv.agriservice.entity.District;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
@@ -13,4 +14,6 @@ import static com.hvv.agriservice.repository.CustomQuery.getDistrictToShowManage
 public interface DistrictRepository extends ReactiveCrudRepository<District, Long> {
     @Query(getDistrictToShowManagement)
     Flux<DistrictManagementDTO> getDistrictToShowManagement(int offset, int size);
+
+    Flux<DistrictToSelectDTO> getDistrictsByCityId(Long cityId);
 }

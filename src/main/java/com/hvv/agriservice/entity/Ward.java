@@ -26,6 +26,8 @@ public class Ward implements Persistable<Long> {
     private String name;                        // Ten phuong, xa
     @Column("postal_code")
     private String postalCode;                  // Ma buu dien cua quan huyen
+    @Column("district_id")
+    private Long districtId;
     @Column("created_at")
     private LocalDateTime createdAt;            // Thoi gian tao moi
     @Column("created_by")

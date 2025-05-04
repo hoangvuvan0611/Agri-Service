@@ -55,6 +55,8 @@ public class DistrictController {
 
     @GetMapping(path = BY_CITY_ID)
     public Mono<ResponseData<?>> getDistrictsByCityId(@PathVariable String cityId) {
-        return null;
+        return districtService.getDistrictsByCityId(cityId)
+                .collectList()
+                .map(districtToSelectDTOS -> ResponseData.success("", districtToSelectDTOS));
     }
 }

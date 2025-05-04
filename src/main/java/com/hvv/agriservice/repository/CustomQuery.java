@@ -47,6 +47,14 @@ public interface CustomQuery {
             "  JOIN cities c on d.city_id = c.id " +
             "  LIMIT :size " +
             "  OFFSET :offset ;";
+
+    String getWardToShowManagement =
+            "SELECT w.id, w.name, w.postal_code, w.created_at, w.updated_at, d.name as district, c.name as city" +
+            " FROM wards w " +
+            " JOIN districts d on d.id = w.district_id " +
+            " JOIN cities c on c.id = d.city_id" +
+            " LIMIT :size " +
+            " OFFSET :offset ;";
 }
 
 
