@@ -10,7 +10,7 @@ public class CorsGlobalConfig implements WebFluxConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3001") // Phải có đầy đủ schema (http://)
+                .allowedOrigins("http://localhost:3000") // Phải có đầy đủ schema (http://)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

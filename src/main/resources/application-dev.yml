@@ -38,3 +38,10 @@ minio:
 webClient:
   recommendation:
     url: http://localhost:5000
+
+
+jwt:
+  secret: 8r86whufhskfjhsdfjshdf
+  expiration: 345456
+  refresh:
+    expiration: 3244324

@@ -110,15 +110,13 @@ CREATE TABLE IF NOT EXISTS customers (
     address VARCHAR(100),
     city_id BIGINT REFERENCES cities(id),
     district_id BIGINT REFERENCES districts(id),
+    ward_id BIGINT REFERENCES wards(id),
     phone_number VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (username),
     UNIQUE (email)
 );
-CREATE INDEX idx_customers_phone ON customers(phone_number);
-CREATE INDEX idx_customers_city ON customers(city_id);
-CREATE INDEX idx_customers_district ON customers(district_id);
 
 -- Tạo bảng assets và index
 CREATE TABLE IF NOT EXISTS assets (

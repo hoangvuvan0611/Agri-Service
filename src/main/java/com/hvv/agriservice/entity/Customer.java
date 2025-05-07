@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "customer")
+@Table(name = "customers")
 public class Customer implements Persistable<Long> {
     @Id
     @Column("id")
@@ -35,9 +35,9 @@ public class Customer implements Persistable<Long> {
     @Column("address")
     private String address;                 // Dia chi
     @Column("city_id")
-    private String cityId;                    // Thanh pho
+    private Long cityId;                    // Thanh pho
     @Column("district_id")
-    private String districtId;                // Quan huyen
+    private Long districtId;                // Quan huyen
     @Column("ward_id")
     private Long wardId;                          // Id xa phuong
     @Column("phone_number")
