@@ -22,4 +22,5 @@ public class ProductManagementDTO {
     private Long sold;
     private Long stock;
     private String status;
+    private String path;
 }

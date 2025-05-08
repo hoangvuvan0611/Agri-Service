@@ -38,4 +38,7 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
 
     @Query(getProductToShowManagement)
     Flux<ProductManagementDTO> getProductToShowManagement(int offset, int size);
+
+    @Query(searchByName)
+    Flux<ProductDTO> searchProductByName(String keyword);
 }

@@ -21,13 +21,19 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getById(@PathVariable String id) {
-        return null;
+    public Mono<ResponseData<?>> getById(@PathVariable String id) {
+        return orderService.findById(id)
+                .map(orderDTO -> ResponseData.success("", orderDTO));
     }
 
     @GetMapping(path = ALL)
-    public ResponseEntity<?> getAll() {
-        return null;
+    public Mono<ResponseData<?>> getAll(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ) {
+        return orderService.findAllByPage(page, size)
+                .collectList()
+                .map(orders -> ResponseData.success("", orders));
     }
 
     @PostMapping(path = CREATE)

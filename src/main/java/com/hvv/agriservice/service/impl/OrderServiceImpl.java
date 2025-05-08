@@ -2,6 +2,8 @@ package com.hvv.agriservice.service.impl;
 
 import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
 import com.hvv.agriservice.constant.enums.OrderStatusEnum;
+import com.hvv.agriservice.core.mapstruct.OrderMapper;
+import com.hvv.agriservice.dto.model.OrderDTO;
 import com.hvv.agriservice.dto.model.ShippingInfo;
 import com.hvv.agriservice.dto.request.CreateOrderRequest;
 import com.hvv.agriservice.entity.Customer;
@@ -12,7 +14,10 @@ import com.hvv.agriservice.service.OrderService;
 import com.hvv.agriservice.utils.DataUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
@@ -56,5 +61,18 @@ public class OrderServiceImpl implements OrderService {
                     return orderRepository.save(orderToSave)
                             .thenReturn(true); // sau khi lưu order thành công
                 });
+    }
+
+    @Override
+    public Flux<OrderDTO> findAllByPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return orderRepository.findAllBy(pageable)
+                .map(OrderMapper.INSTANCE::orderToOrderDTO);
+    }
+
+    @Override
+    public Mono<OrderDTO> findById(String id) {
+        return orderRepository.findById(DataUtils.safeToLong(id))
+                .map(OrderMapper.INSTANCE::orderToOrderDTO);
     }
 }

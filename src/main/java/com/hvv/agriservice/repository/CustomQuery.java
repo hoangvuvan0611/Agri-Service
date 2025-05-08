@@ -28,10 +28,11 @@ public interface CustomQuery {
             "SELECT COUNT(*) FROM products";
 
     String getProductToShowManagement =
-            "SELECT p.id, p.name, p.original_price, p.sale_price, p.sold, " +
+            "SELECT p.id, p.name, p.original_price, p.sale_price, p.sold, a.path, " +
             "p.quantity, c.name as category, p.status" +
             "  FROM products p " +
             "  JOIN categories c ON c.id = p.category_id " +
+            "  JOIN assets a ON p.id = a.product_id "   +
             "  LIMIT :size " +
             "  OFFSET :offset ;";
 
@@ -65,6 +66,13 @@ public interface CustomQuery {
     String getCitiesToSelect =
             "SELECT c.id, c.name " +
             "FROM cities c ";
+
+    String searchByName =
+            "SELECT p.id, p.name, a.path as path" +
+            " FROM products p " +
+            " JOIN assets a ON p.id = a.product_id " +
+            " WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            " LIMIT 5";
 }
 
 

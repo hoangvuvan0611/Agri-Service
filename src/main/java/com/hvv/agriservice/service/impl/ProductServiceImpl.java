@@ -4,9 +4,11 @@ import com.hvv.agriservice.core.mapstruct.ProductMapper;
 import com.hvv.agriservice.dto.model.ProductDTO;
 import com.hvv.agriservice.dto.model.ProductManagementDTO;
 import com.hvv.agriservice.dto.model.RecommendationIdProductDTO;
+import com.hvv.agriservice.entity.Product;
 import com.hvv.agriservice.repository.ProductRepository;
 import com.hvv.agriservice.service.ProductService;
 import com.hvv.agriservice.service.RecommendationService;
+import com.hvv.agriservice.utils.DataUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -63,5 +65,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Flux<ProductManagementDTO> getProductToShowManagement(int page, int size) {
         return productRepository.getProductToShowManagement(page*size, size);
+    }
+
+    @Override
+    public Mono<Product> getProductById(String id) {
+        return productRepository.findById(DataUtils.safeToLong(id));
+    }
+
+    @Override
+    public Flux<ProductDTO> searchByKeyword(String keyword) {
+        return productRepository.searchProductByName(keyword);
     }
 }

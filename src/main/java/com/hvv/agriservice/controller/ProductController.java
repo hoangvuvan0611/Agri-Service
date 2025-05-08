@@ -45,8 +45,9 @@ public class ProductController {
      * @return
      */
     @GetMapping(path = ID)
-    public ResponseEntity<?> getById(@PathVariable String id) {
-        return null;
+    public Mono<ResponseData<?>> getById(@PathVariable String id) {
+        return productService.getProductById(id)
+                .map(product -> ResponseData.success("", product));
     }
 
     /**
@@ -123,6 +124,13 @@ public class ProductController {
             @RequestParam(name = "size", defaultValue = "20") int size
     ) {
         return productService.getProductToShowManagement(page, size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
+
+    @GetMapping(path = SEARCH_BY_KEYWORD)
+    public Mono<ResponseData<?>> searchByKeyword(@PathVariable String keyword) {
+        return productService.searchByKeyword(keyword)
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
     }

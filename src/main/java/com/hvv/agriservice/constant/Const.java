@@ -23,6 +23,7 @@ public class Const {
         String GET_PRODUCTS_SHOW_INIT = "/showInit";
         String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
         String GET_TOTAL = "/total";
+        String SEARCH_BY_KEYWORD = "/search={keyword}";
     }
 
     public interface Common {
@@ -98,5 +99,10 @@ public class Const {
 
     public interface FilePath {
         String FILE_PATH = "/file";
+    }
+
+    public interface ReportPath {
+        String REPORT_PATH = "/report";
+        String TOTAL_REVENUE = "/totalRevenue";
     }
 }
