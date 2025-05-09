@@ -318,7 +318,8 @@ CREATE TABLE IF NOT EXISTS descriptions (
 -- Luu tru hanh vi thao tac voi trang web cua nguoi dung
 CREATE TABLE IF NOT EXISTS collaboratives (
     id BIGINT PRIMARY KEY NOT NULL,
-    user_id BIGINT NOT NULL,
+    user_id BIGINT,
+    session_id TEXT,
     product_id BIGINT NOT NULL,
     action_type TEXT NOT NULL,
     action_value TEXT NOT NULL,

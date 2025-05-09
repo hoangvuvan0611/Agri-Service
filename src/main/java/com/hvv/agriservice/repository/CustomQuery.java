@@ -68,7 +68,7 @@ public interface CustomQuery {
             "FROM cities c ";
 
     String searchByName =
-            "SELECT p.id, p.name, a.path as path" +
+            "SELECT p.id, p.name, p.slug , a.path as path" +
             " FROM products p " +
             " JOIN assets a ON p.id = a.product_id " +
             " WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
