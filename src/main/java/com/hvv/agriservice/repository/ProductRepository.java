@@ -16,7 +16,7 @@ import java.util.List;
 import static com.hvv.agriservice.repository.CustomQuery.*;
 
 @Repository
-public interface ProductRepository extends ReactiveCrudRepository<Product, Long>, ReactiveSortingRepository<Product, Long> {
+public interface ProductRepository extends ReactiveCrudRepository<Product, Long> {
     Flux<Product> findByNameContainingIgnoreCase(String name);
     Mono<Product> findByNameIgnoreCase(String name);
 
@@ -27,18 +27,40 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
 
     Mono<Long> count();
 
-    @Query(getProductsToShowInit)
+    @Query("    SELECT p.id, p.name, p.slug, d.uses, p.original_price, p.sale_price, p.sold, p.quantity, p.featured, a.path " +
+            "   FROM products p  " +
+            "   JOIN descriptions d ON p.id = d.product_id " +
+            "   JOIN assets a ON p.id = a.product_id " +
+            "   LIMIT :size " +
+            "   OFFSET :offset ;")
     Flux<ProductDTO> getProductsToShowInit(int offset, int size);
 
-    @Query(getProductBySlug)
+    @Query("    SELECT p.id, p.name, p.slug, d.uses, p.original_price, " +
+            "   p.sale_price, p.sold, p.quantity, p.featured, a.path " +
+            "   FROM products p  " +
+            "   JOIN descriptions d ON p.id = d.product_id " +
+            "   JOIN assets a ON p.id = a.product_id " +
+            "   WHERE p.slug = :slug")
     Mono<ProductDTO> getProductBySlug(String slug);
 
-    @Query(getCountAllProduct)
+    @Query("SELECT COUNT(*) FROM products")
     Mono<Long> getTotal();
 
-    @Query(getProductToShowManagement)
+    @Query("    SELECT p.id, p.name, p.original_price, p.sale_price, p.sold, a.path, " +
+            "   p.quantity, c.name as category, p.status" +
+            "   FROM products p " +
+            "   JOIN categories c ON c.id = p.category_id " +
+            "   JOIN assets a ON p.id = a.product_id "   +
+            "   LIMIT :size " +
+            "   OFFSET :offset ;")
     Flux<ProductManagementDTO> getProductToShowManagement(int offset, int size);
 
-    @Query(searchByName)
+    @Query("    SELECT p.id, p.name, p.slug , a.path as path " +
+            "   FROM products p " +
+            "   JOIN assets a ON p.id = a.product_id " +
+            "   WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "   LIMIT 5 ")
     Flux<ProductDTO> searchProductByName(String keyword);
+
+//    Flux<ProductDTO> getListProductBestSellerInMonth();
 }

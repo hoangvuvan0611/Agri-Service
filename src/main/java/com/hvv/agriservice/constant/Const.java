@@ -5,6 +5,7 @@ public class Const {
     public static final String UPDATE = "/update";
     public static final String CREATE = "/create";
     public static final String ID = "/{id}";
+    public static final String SHOW_LIST = "/showList";
 
     public interface UrlCommon {
         String PRODUCT_CSV_PATH = "metadata/Product.csv";

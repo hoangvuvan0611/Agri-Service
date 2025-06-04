@@ -46,4 +46,14 @@ public class OrderController {
     public ResponseEntity<?> update() {
         return null;
     }
+
+    @GetMapping(path = SHOW_LIST)
+    public Mono<ResponseData<?>> getListShow(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size
+    ) {
+        return orderService.getListToShow(page, size)
+                .collectList()
+                .map(orders -> ResponseData.success("", orders));
+    }
 }

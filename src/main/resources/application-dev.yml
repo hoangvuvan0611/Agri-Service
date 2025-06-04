@@ -28,7 +28,7 @@ logging:
 
 
 minio:
-  endpoint: http://116.104.51.101:8080
+  endpoint: https://s3minio.unilife.io.vn
 #  endpoint: http://localhost:9000
   access-key: admin
   secret-key: admin123
