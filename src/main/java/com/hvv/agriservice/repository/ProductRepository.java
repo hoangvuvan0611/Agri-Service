@@ -62,5 +62,16 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
             "   LIMIT 5 ")
     Flux<ProductDTO> searchProductByName(String keyword);
 
-//    Flux<ProductDTO> getListProductBestSellerInMonth();
+    /**
+     * Lay danh sach san pham ban chay nhat (dua theo so luong) trong thang
+     * @return
+     */
+    @Query("SELECT p.id, p.name, p.original_price, a.path as path, sum(oi.quantity) AS quantity " +
+            "FROM products p " +
+            "JOIN order_items oi ON p.id = oi.product_id " +
+            "JOIN assets a ON p.id = a.product_id " +
+            "WHERE oi.created_at >= CURRENT_DATE - INTERVAL '30 days' " +
+            "GROUP BY p.id, p.name, path " +
+            "ORDER BY quantity DESC LIMIT :size;")
+    Flux<ProductDTO> getListProductBestSellerInMonth(int size);
 }

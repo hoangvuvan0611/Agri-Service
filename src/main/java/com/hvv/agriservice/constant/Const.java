@@ -25,6 +25,7 @@ public class Const {
         String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
         String GET_TOTAL = "/total";
         String SEARCH_BY_KEYWORD = "/search={keyword}";
+        String GET_LIST_BEST_SELLER_IN_MONTH = "/bestSellerInMonth={size}";
     }
 
     public interface Common {

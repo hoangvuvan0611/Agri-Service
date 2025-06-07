@@ -18,4 +18,5 @@ public interface ProductService {
     Flux<ProductManagementDTO> getProductToShowManagement(int page, int size);
     Mono<Product> getProductById(String id);
     Flux<ProductDTO> searchByKeyword(String keyword);
+    Flux<ProductDTO> getListProductBestSellerInMonth(int size);
 }

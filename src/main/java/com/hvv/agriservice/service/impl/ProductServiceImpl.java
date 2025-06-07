@@ -76,4 +76,9 @@ public class ProductServiceImpl implements ProductService {
     public Flux<ProductDTO> searchByKeyword(String keyword) {
         return productRepository.searchProductByName(keyword);
     }
+
+    @Override
+    public Flux<ProductDTO> getListProductBestSellerInMonth(int size) {
+        return productRepository.getListProductBestSellerInMonth(size);
+    }
 }

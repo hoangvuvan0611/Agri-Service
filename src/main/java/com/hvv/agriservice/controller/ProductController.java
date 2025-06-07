@@ -134,4 +134,11 @@ public class ProductController {
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
     }
+
+    @GetMapping(path = GET_LIST_BEST_SELLER_IN_MONTH)
+    public Mono<ResponseData<?>> getListProductBestSellerInMonth(@PathVariable int size) {
+        return productService.getListProductBestSellerInMonth(size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
 }
