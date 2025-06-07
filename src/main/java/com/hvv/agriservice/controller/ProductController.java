@@ -95,7 +95,7 @@ public class ProductController {
     @GetMapping(path = GET_PRODUCTS_SHOW_INIT)
     public Mono<ResponseData<?>> getProductsToShowInit(
             @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size
+            @RequestParam(name = "size", defaultValue = "20") int size
     ) {
         return productService.getProductsToShowInit(page, size)
                 .collectList()
@@ -109,6 +109,17 @@ public class ProductController {
     @GetMapping(path = GET_PRODUCT_BY_SLUG)
     public Mono<ResponseData<?>> getProductsBySlug(@PathVariable String slug) {
         return productService.getProductBySLug(slug)
+                .map(productDTO -> ResponseData.success("", productDTO));
+    }
+
+    @GetMapping(path = GET_PRODUCT_BY_CATEGORY)
+    public Mono<ResponseData<?>> getProductsByCategoryId(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size,
+            @RequestParam(name = "size", defaultValue = "0") Long categoryId
+    ) {
+        return productService.getProductsByCategoryId(page, size, categoryId)
+                .collectList()
                 .map(productDTO -> ResponseData.success("", productDTO));
     }
 
@@ -129,8 +140,13 @@ public class ProductController {
     }
 
     @GetMapping(path = SEARCH_BY_KEYWORD)
-    public Mono<ResponseData<?>> searchByKeyword(@PathVariable String keyword) {
-        return productService.searchByKeyword(keyword)
+    public Mono<ResponseData<?>> searchByKeyword(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size,
+            @RequestParam(name = "keyword", defaultValue = "") String keyword,
+            @RequestParam(name = "categoryId", defaultValue = "") Long categoryId
+    ) {
+        return productService.searchByKeyword(page, size, keyword, categoryId)
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
     }

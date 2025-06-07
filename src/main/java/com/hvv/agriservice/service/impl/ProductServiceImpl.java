@@ -58,6 +58,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Flux<ProductManagementDTO> getProductsByCategoryId(int page, int size, Long categoryId) {
+        return productRepository.getProductsByCategoryId(page*size, size, categoryId);
+    }
+
+    @Override
     public Mono<Long> getTotal() {
         return productRepository.getTotal();
     }
@@ -73,8 +78,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Flux<ProductDTO> searchByKeyword(String keyword) {
-        return productRepository.searchProductByName(keyword);
+    public Flux<ProductManagementDTO> searchByKeyword(int page, int size, String keyword, Long categoryId) {
+        return productRepository.searchProductByName(page, size, keyword, categoryId);
     }
 
     @Override

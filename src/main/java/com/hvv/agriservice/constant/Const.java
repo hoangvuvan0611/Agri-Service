@@ -23,8 +23,9 @@ public class Const {
         String GET_RECOMMENDATION_PRODUCTS_BY_ID = "/recommend_products/{id}";
         String GET_PRODUCTS_SHOW_INIT = "/showInit";
         String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
+        String GET_PRODUCT_BY_CATEGORY = "/productByCategory={category}";
         String GET_TOTAL = "/total";
-        String SEARCH_BY_KEYWORD = "/search={keyword}";
+        String SEARCH_BY_KEYWORD = "/search";
         String GET_LIST_BEST_SELLER_IN_MONTH = "/bestSellerInMonth={size}";
     }
 

@@ -14,9 +14,10 @@ public interface ProductService {
     Flux<ProductDTO> findAllByPage(int page, int size);
     Flux<ProductDTO> getProductsToShowInit(int page, int size);
     Mono<ProductDTO> getProductBySLug(String slug);
+    Flux<ProductManagementDTO> getProductsByCategoryId(int page, int size, Long categoryId);
     Mono<Long> getTotal();
     Flux<ProductManagementDTO> getProductToShowManagement(int page, int size);
     Mono<Product> getProductById(String id);
-    Flux<ProductDTO> searchByKeyword(String keyword);
+    Flux<ProductManagementDTO> searchByKeyword(int page, int size, String keyword, Long categoryId);
     Flux<ProductDTO> getListProductBestSellerInMonth(int size);
 }

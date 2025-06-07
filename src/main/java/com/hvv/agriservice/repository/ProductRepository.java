@@ -55,12 +55,24 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
             "   OFFSET :offset ;")
     Flux<ProductManagementDTO> getProductToShowManagement(int offset, int size);
 
+    @Query("    SELECT p.id, p.name, p.original_price, p.sale_price, p.sold, a.path, " +
+            "   p.quantity, c.name as category, p.status" +
+            "   FROM products p " +
+            "   JOIN categories c ON c.id = p.category_id " +
+            "   JOIN assets a ON p.id = a.product_id "   +
+            "   WHERE p.category_id = :categoryId " +
+            "   LIMIT :size " +
+            "   OFFSET :offset ;")
+    Flux<ProductManagementDTO> getProductsByCategoryId(int offset, int size, Long categoryId);
+
     @Query("    SELECT p.id, p.name, p.slug , a.path as path " +
             "   FROM products p " +
             "   JOIN assets a ON p.id = a.product_id " +
             "   WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "   LIMIT 5 ")
-    Flux<ProductDTO> searchProductByName(String keyword);
+            "   AND p.category_id = :categoryId " +
+            "   LIMIT :size " +
+            "   OFFSET :offset ;")
+    Flux<ProductManagementDTO> searchProductByName(int page, int size, String keyword, Long categoryId);
 
     /**
      * Lay danh sach san pham ban chay nhat (dua theo so luong) trong thang
