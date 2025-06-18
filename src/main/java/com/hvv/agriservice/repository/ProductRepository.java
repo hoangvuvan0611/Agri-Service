@@ -6,7 +6,6 @@ import com.hvv.agriservice.entity.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,7 +15,7 @@ import java.util.List;
 import static com.hvv.agriservice.repository.CustomQuery.*;
 
 @Repository
-public interface ProductRepository extends ReactiveCrudRepository<Product, Long> {
+public interface ProductRepository extends ReactiveCrudRepository<Product, Long>, ProductRepositoryCustom {
     Flux<Product> findByNameContainingIgnoreCase(String name);
     Mono<Product> findByNameIgnoreCase(String name);
 
@@ -69,10 +68,8 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
             "   FROM products p " +
             "   JOIN assets a ON p.id = a.product_id " +
             "   WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "   AND p.category_id = :categoryId " +
-            "   LIMIT :size " +
-            "   OFFSET :offset ;")
-    Flux<ProductManagementDTO> searchProductByName(int page, int size, String keyword, Long categoryId);
+            "   LIMIT 10 ")
+    Flux<ProductDTO> searchProductByName(String keyword);
 
     /**
      * Lay danh sach san pham ban chay nhat (dua theo so luong) trong thang
@@ -86,4 +83,12 @@ public interface ProductRepository extends ReactiveCrudRepository<Product, Long>
             "GROUP BY p.id, p.name, path " +
             "ORDER BY quantity DESC LIMIT :size;")
     Flux<ProductDTO> getListProductBestSellerInMonth(int size);
+
+    @Query("    SELECT p.id, p.name, p.slug, d.uses, p.original_price, " +
+            "   p.sale_price, p.sold, p.quantity, p.featured, a.path " +
+            "   FROM products p  " +
+            "   JOIN descriptions d ON p.id = d.product_id " +
+            "   JOIN assets a ON p.id = a.product_id " +
+            "   WHERE p.id IN (:listProductId)")
+    Flux<ProductDTO> findProductsByListId(List<Long> listProductId);
 }

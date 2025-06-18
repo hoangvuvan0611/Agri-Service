@@ -6,6 +6,8 @@ import com.hvv.agriservice.entity.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 public interface ProductService {
 
     Flux<Long> getRecommendationsIdById(Long id);
@@ -18,6 +20,8 @@ public interface ProductService {
     Mono<Long> getTotal();
     Flux<ProductManagementDTO> getProductToShowManagement(int page, int size);
     Mono<Product> getProductById(String id);
-    Flux<ProductManagementDTO> searchByKeyword(int page, int size, String keyword, Long categoryId);
+    Flux<ProductDTO> searchByKeyword(String keyword);
     Flux<ProductDTO> getListProductBestSellerInMonth(int size);
+    Flux<ProductManagementDTO> findProductsByMultiCondition(int size, int page, String keyword, Long categoryId);
+    Flux<ProductDTO> findProductsByListId(List<Long> listProductId);
 }

@@ -25,8 +25,10 @@ public class Const {
         String GET_PRODUCT_BY_SLUG = "/productBySlug={slug}";
         String GET_PRODUCT_BY_CATEGORY = "/productByCategory={category}";
         String GET_TOTAL = "/total";
-        String SEARCH_BY_KEYWORD = "/search";
+        String SEARCH_BY_KEYWORD = "/search={keyword}";
         String GET_LIST_BEST_SELLER_IN_MONTH = "/bestSellerInMonth={size}";
+        String FIND_BY_MULTI_CONDITION = "/findProductsByMultiCondition";
+        String FIND_BY_LIST_ID = "/findProductsByListId";
     }
 
     public interface Common {

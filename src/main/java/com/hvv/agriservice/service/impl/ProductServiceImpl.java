@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -78,12 +80,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Flux<ProductManagementDTO> searchByKeyword(int page, int size, String keyword, Long categoryId) {
-        return productRepository.searchProductByName(page, size, keyword, categoryId);
+    public Flux<ProductDTO> searchByKeyword(String keyword) {
+        return productRepository.searchProductByName(keyword);
     }
 
     @Override
     public Flux<ProductDTO> getListProductBestSellerInMonth(int size) {
         return productRepository.getListProductBestSellerInMonth(size);
+    }
+
+    @Override
+    public Flux<ProductManagementDTO> findProductsByMultiCondition(int size, int page, String keyword, Long categoryId) {
+        return productRepository.findProductsByMultiCondition(size, page*size, keyword, categoryId);
+    }
+
+    @Override
+    public Flux<ProductDTO> findProductsByListId(List<Long> listProductId) {
+        return productRepository.findProductsByListId(listProductId);
     }
 }

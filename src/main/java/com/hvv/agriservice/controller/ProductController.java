@@ -1,12 +1,15 @@
 package com.hvv.agriservice.controller;
 
 import com.hvv.agriservice.dto.base.ResponseData;
+import com.hvv.agriservice.dto.request.ProductIdsRequest;
 import com.hvv.agriservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 import static com.hvv.agriservice.constant.Const.*;
 import static com.hvv.agriservice.constant.Const.Common.GET_MANAGEMENT;
@@ -140,13 +143,8 @@ public class ProductController {
     }
 
     @GetMapping(path = SEARCH_BY_KEYWORD)
-    public Mono<ResponseData<?>> searchByKeyword(
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size,
-            @RequestParam(name = "keyword", defaultValue = "") String keyword,
-            @RequestParam(name = "categoryId", defaultValue = "") Long categoryId
-    ) {
-        return productService.searchByKeyword(page, size, keyword, categoryId)
+    public Mono<ResponseData<?>> searchByKeyword(@PathVariable String keyword) {
+        return productService.searchByKeyword(keyword)
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
     }
@@ -154,6 +152,20 @@ public class ProductController {
     @GetMapping(path = GET_LIST_BEST_SELLER_IN_MONTH)
     public Mono<ResponseData<?>> getListProductBestSellerInMonth(@PathVariable int size) {
         return productService.getListProductBestSellerInMonth(size)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
+
+    @GetMapping(path = FIND_BY_MULTI_CONDITION)
+    public Mono<ResponseData<?>> findProductsByMultiCondition(int size, int page, String keyword, Long categoryId) {
+        return productService.findProductsByMultiCondition(size, page, keyword, categoryId)
+                .collectList()
+                .map(productDTOS -> ResponseData.success("", productDTOS));
+    }
+
+    @PostMapping(path = FIND_BY_LIST_ID)
+    public Mono<ResponseData<?>> findProductsByListId(@RequestBody ProductIdsRequest request) {
+        return productService.findProductsByListId(request.getListProductId())
                 .collectList()
                 .map(productDTOS -> ResponseData.success("", productDTOS));
     }
