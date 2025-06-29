@@ -1,5 +1,6 @@
 package com.hvv.agriservice.service.impl;
 
+import com.hvv.agriservice.dto.model.ReportCommonDTO;
 import com.hvv.agriservice.repository.OrderRepository;
 import com.hvv.agriservice.service.ReportService;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Mono<BigDecimal> getTotalRevenue() {
         return orderRepository.getTotalRevenue();
+    }
+
+    @Override
+    public Mono<ReportCommonDTO> getReportCommon(String unit) {
+        return null;
     }
 }

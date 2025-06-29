@@ -46,13 +46,14 @@ public class DataUtils {
         }
     }
 
-    public static long safeToLong(String input) {
-        if (input == null || input.isEmpty()) {
+    public static long safeToLong(Object input) {
+        String inputStr = String.valueOf(input.toString());
+        if (inputStr == null || inputStr.isEmpty()) {
             return 0L;
         }
 
         try {
-            return Long.parseLong(input);
+            return Long.parseLong(inputStr);
         } catch (NumberFormatException e) {
             System.out.println("STL000-1: Loi khi convert String to long: " + e);
             return 0L;

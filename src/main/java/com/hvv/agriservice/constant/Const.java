@@ -5,6 +5,7 @@ public class Const {
     public static final String UPDATE = "/update";
     public static final String CREATE = "/create";
     public static final String ID = "/{id}";
+    public static final String DETAIL_ID = "/detail={id}";
     public static final String SHOW_LIST = "/showList";
 
     public interface UrlCommon {
@@ -109,5 +110,11 @@ public class Const {
     public interface ReportPath {
         String REPORT_PATH = "/report";
         String TOTAL_REVENUE = "/totalRevenue";
+    }
+
+    public interface ReportUnit {
+        String UNIT_MONTH = "MONTH";
+        String UNIT_WEEK = "WEEK";
+        String UNIT_YEAR = "YEAR";
     }
 }

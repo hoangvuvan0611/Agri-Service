@@ -4,6 +4,7 @@ import com.hvv.agriservice.config.common.SnowflakeIdGenerator;
 import com.hvv.agriservice.constant.enums.OrderStatusEnum;
 import com.hvv.agriservice.core.mapstruct.OrderMapper;
 import com.hvv.agriservice.dto.model.OrderDTO;
+import com.hvv.agriservice.dto.model.OrderDetailDTO;
 import com.hvv.agriservice.dto.model.OrderShowListDTO;
 import com.hvv.agriservice.dto.model.ShippingInfo;
 import com.hvv.agriservice.dto.request.CreateOrderRequest;
@@ -17,8 +18,6 @@ import com.hvv.agriservice.service.OrderService;
 import com.hvv.agriservice.utils.DataUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -123,10 +122,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Flux<OrderDTO> findAllByPage(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return orderRepository.findAllBy(pageable)
-                .map(OrderMapper.INSTANCE::orderToOrderDTO);
+    public Flux<OrderShowListDTO> findAllByPage(int page, int size) {
+        return orderRepository.getListToShow(page*size, size);
     }
 
     @Override
@@ -138,5 +135,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Flux<OrderShowListDTO> getListToShow(int page, int size) {
         return orderRepository.getListToShow(page * size, size);
+    }
+
+    @Override
+    public Mono<OrderDetailDTO> getOrderDetailById(Long orderId) {
+        return orderRepository.getOrderDetailById(orderId);
     }
 }

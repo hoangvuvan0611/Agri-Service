@@ -36,6 +36,7 @@ public class MinioConfig {
                     .credentials(accessKey, secretKey)
                     .build();
         } catch (Exception e) {
+            logger.error("Error when calling external API", e);
             e.printStackTrace();
             logger.error("Init Minio error: {}", e.getMessage());
             throw new RuntimeException("IMC0000: Init minio error" + e.getMessage());

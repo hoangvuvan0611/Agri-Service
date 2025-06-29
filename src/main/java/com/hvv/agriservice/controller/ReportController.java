@@ -6,6 +6,7 @@ import com.hvv.agriservice.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -22,5 +23,15 @@ public class ReportController {
     public Mono<ResponseData<?>> getTotalRevenue() {
         return reportService.getTotalRevenue()
                 .map(total -> ResponseData.success("", total));
+    }
+
+    /**
+     * Lay thong tin bao cao chung theo tuan, thang, nam
+     * @param unit: danh dau xem la ngay, thang hay nam
+     * @return
+     */
+    @GetMapping(path = "")
+    public Mono<ResponseData<?>> getReportCommon(@RequestParam(name = "unit") String unit) {
+        return null;
     }
 }

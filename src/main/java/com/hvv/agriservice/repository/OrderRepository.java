@@ -1,6 +1,7 @@
 package com.hvv.agriservice.repository;
 
 import com.hvv.agriservice.dto.model.OrderShowListDTO;
+import com.hvv.agriservice.dto.model.ReportCommonDTO;
 import com.hvv.agriservice.entity.Order;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
@@ -12,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 @Repository
-public interface OrderRepository extends ReactiveCrudRepository<Order, Long> {
+public interface OrderRepository extends ReactiveCrudRepository<Order, Long>, OrderCustomRepository {
     Flux<Order> findAllBy(Pageable pageable);
     Mono<Order> findById(Long id);
 
@@ -38,4 +39,6 @@ public interface OrderRepository extends ReactiveCrudRepository<Order, Long> {
             " LIMIT :size " +
             " OFFSET :offset ")
     Flux<OrderShowListDTO> getListToShow(int offset, int size);
+
+
 }

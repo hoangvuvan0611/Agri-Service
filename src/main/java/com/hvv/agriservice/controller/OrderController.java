@@ -3,6 +3,7 @@ package com.hvv.agriservice.controller;
 import com.hvv.agriservice.dto.base.ResponseData;
 import com.hvv.agriservice.dto.request.CreateOrderRequest;
 import com.hvv.agriservice.service.OrderService;
+import com.hvv.agriservice.utils.DataUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +56,11 @@ public class OrderController {
         return orderService.getListToShow(page, size)
                 .collectList()
                 .map(orders -> ResponseData.success("", orders));
+    }
+
+    @GetMapping(path = DETAIL_ID)
+    public Mono<ResponseData<?>> getOrderDetailById(@PathVariable String id) {
+        return orderService.getOrderDetailById(DataUtils.safeToLong(id))
+                .map(orderDTO -> ResponseData.success("", orderDTO));
     }
 }
