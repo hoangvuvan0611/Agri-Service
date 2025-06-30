@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import static com.hvv.agriservice.constant.Const.*;
+import static com.hvv.agriservice.constant.Const.OrderPath.ORDER_STATUS;
+import static com.hvv.agriservice.constant.Const.OrderPath.UPDATE_STATUS;
 
 @CrossOrigin
 @Slf4j
@@ -62,5 +64,18 @@ public class OrderController {
     public Mono<ResponseData<?>> getOrderDetailById(@PathVariable String id) {
         return orderService.getOrderDetailById(DataUtils.safeToLong(id))
                 .map(orderDTO -> ResponseData.success("", orderDTO));
+    }
+
+    @GetMapping(path = UPDATE_STATUS)
+    public Mono<ResponseData<?>> updateOrderStatus(@RequestParam(name = "id") String id,
+                                                   @RequestParam(name = "status") String status) {
+      return orderService.updateOrderStatus(Long.valueOf(id), status)
+              .map(result -> ResponseData.success("", result));
+    }
+
+    @GetMapping(path = ORDER_STATUS)
+    public Mono<ResponseData<?>> getListOrderStatus(@RequestParam(name = "exclusionStatus") String exclusionStatus) {
+        return orderService.getListOrderStatus(exclusionStatus)
+                .map(result -> ResponseData.success("", result));
     }
 }

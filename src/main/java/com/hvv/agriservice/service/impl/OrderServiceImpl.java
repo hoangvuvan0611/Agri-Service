@@ -24,6 +24,8 @@ import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -140,5 +142,30 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Mono<OrderDetailDTO> getOrderDetailById(Long orderId) {
         return orderRepository.getOrderDetailById(orderId);
+    }
+
+    @Override
+    public Mono<Boolean> updateOrderStatus(Long id, String status) {
+        OrderStatusEnum statusEnum;
+        try {
+            statusEnum = OrderStatusEnum.valueOf(status);
+        } catch (IllegalArgumentException e) {
+            return Mono.just(false); // Trả về false nếu status không hợp lệ
+        }
+
+        return orderRepository.findById(id)
+                .flatMap(order -> {
+                    order.setStatus(statusEnum);
+                    return orderRepository.save(order).thenReturn(true);
+                })
+                .defaultIfEmpty(false);
+    }
+
+    @Override
+    public Mono<List<String>> getListOrderStatus(String exclusionStatus) {
+        return Mono.just(Arrays.stream(OrderStatusEnum.values())
+                .map(Enum::name)
+                .filter(name -> !name.equalsIgnoreCase(exclusionStatus))
+                .collect(Collectors.toList()));
     }
 }

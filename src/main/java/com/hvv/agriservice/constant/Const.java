@@ -16,6 +16,8 @@ public class Const {
 
     public interface OrderPath {
         String ORDER_PATH = "/order";
+        String UPDATE_STATUS = "/updateStatus";
+        String ORDER_STATUS = "/orderStatus";
     }
 
     public interface ProductPath {
