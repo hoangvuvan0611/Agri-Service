@@ -25,7 +25,7 @@ import java.io.InputStream;
 public class MinioServiceImpl implements MinioService {
     Logger log = LoggerFactory.getLogger(MinioServiceImpl.class);
 
-    private final MinioClient minioClient;
+//    private final MinioClient minioClient;
 
     @Value("${minio.bucket-name}")
     private String bucketName;
@@ -35,19 +35,19 @@ public class MinioServiceImpl implements MinioService {
     @Override
     public Mono<Void> createBucketIfNotExists() {
         return Mono.fromCallable(() -> {
-            boolean bucketExists = minioClient.bucketExists(
-                BucketExistsArgs.builder()
-                    .bucket(bucketName)
-                    .build()
-            );
-
-            if (!bucketExists) {
-                minioClient.makeBucket(
-                    MakeBucketArgs.builder()
-                        .bucket(bucketName)
-                        .build()
-                );
-            }
+//            boolean bucketExists = minioClient.bucketExists(
+//                BucketExistsArgs.builder()
+//                    .bucket(bucketName)
+//                    .build()
+//            );
+//
+//            if (!bucketExists) {
+//                minioClient.makeBucket(
+//                    MakeBucketArgs.builder()
+//                        .bucket(bucketName)
+//                        .build()
+//                );
+//            }
             return Mono.empty();
         })
         .doOnError(e -> {
@@ -73,13 +73,13 @@ public class MinioServiceImpl implements MinioService {
                 return Mono.fromCallable(() -> {
                     // Upload file to minio
                     try {
-                        minioClient.putObject(
-                            PutObjectArgs.builder()
-                                .bucket(bucketName)
-                                .object(fileName)
-                                .stream(new ByteArrayInputStream(bytes), bytes.length, -1)
-                                .build()
-                        );
+//                        minioClient.putObject(
+//                            PutObjectArgs.builder()
+//                                .bucket(bucketName)
+//                                .object(fileName)
+//                                .stream(new ByteArrayInputStream(bytes), bytes.length, -1)
+//                                .build()
+//                        );
                         return fileName;
                     } catch (Exception e) {
                         throw new RuntimeException("UF0000-1: File upload failed", e);
@@ -91,33 +91,12 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public Mono<Flux<DataBuffer>> downloadFile(String fileName) {
-        return Mono.fromCallable(() -> {
-            InputStream inputStream = minioClient.getObject(
-                GetObjectArgs.builder()
-                    .bucket(bucketName)
-                    .object(fileName)
-                    .build()
-            );
-            return DataBufferUtils.readInputStream(
-                () -> inputStream,
-                new DefaultDataBufferFactory(),
-                4096
-            );
-        }).subscribeOn(Schedulers.boundedElastic());
+        return null;
     }
 
     @Override
     public Mono<String> getPreSignedUrl(String fileName) {
-        return Mono.fromCallable(() ->
-            minioClient.getPresignedObjectUrl(
-                GetPresignedObjectUrlArgs.builder()
-                    .method(Method.GET)
-                    .bucket(bucketName)
-                    .object(fileName)
-                    .expiry(24*60*60)   // Het han sau 24h
-                    .build()
-            )
-        );
+        return null;
     }
 
     @Override

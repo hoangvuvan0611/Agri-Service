@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MinioStartupConfig implements CommandLineRunner {
 
-    private final MinioClient minioClient;
+//    private final MinioClient minioClient;
 
     @Value("${minio.bucket-name}")
     private String bucketName;
@@ -21,11 +21,11 @@ public class MinioStartupConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Kiểm tra xem bucket có tồn tại chưa
-        boolean bucketExists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
-        if (!bucketExists) {
-            // Tạo bucket nếu chưa tồn tại
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-        }
+//        boolean bucketExists = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+//        if (!bucketExists) {
+//            // Tạo bucket nếu chưa tồn tại
+//            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+//        }
 
         // Áp dụng chính sách đọc công khai cho bucket
         String publicPolicy = "{\n" +
@@ -40,11 +40,11 @@ public class MinioStartupConfig implements CommandLineRunner {
                 "    ]\n" +
                 "}";
 
-        minioClient.setBucketPolicy(
-                SetBucketPolicyArgs.builder()
-                        .bucket(bucketName)
-                        .config(publicPolicy)
-                        .build()
-        );
+//        minioClient.setBucketPolicy(
+//                SetBucketPolicyArgs.builder()
+//                        .bucket(bucketName)
+//                        .config(publicPolicy)
+//                        .build()
+//        );
     }
 }
