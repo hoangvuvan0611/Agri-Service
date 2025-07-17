@@ -6,5 +6,5 @@ RUN mvn clean package -Dmaven.test.skip=true
 
 # Stage 2: Runtime
 FROM amazoncorretto:21-alpine
-COPY --from=builder /app/target/collector-service.jar app.jar
+COPY --from=builder /app/target/Agri-Service.jar app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
