@@ -3,6 +3,8 @@
 APP_NAME="agri-app"
 IMAGE_NAME="agri-image"
 PORT=8050
+NETWORK_NAME="agri-network"
+FLASK_CONTAINER="flask-recommender"
 
 echo "🧹 Xóa container cũ nếu có..."
 docker rm -f $APP_NAME 2>/dev/null
