@@ -2,7 +2,7 @@
 FROM maven:3.9.4-amazoncorretto-21 AS builder
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+RUN ./mvnw clean package -DskipTests -Dmaven.test.skip=true
 
 # Stage 2: Runtime
 FROM amazoncorretto:21-alpine
