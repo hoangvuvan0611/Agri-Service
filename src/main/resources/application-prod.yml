@@ -7,7 +7,7 @@ spring:
   application:
     name: AGRI
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/AGRI_MARKET
+    url: r2dbc:postgresql://172.17.0.1:5432/AGRI_MARKET
     username: vuvanhoang
     password: Hoanglam06112003@
   flyway:
