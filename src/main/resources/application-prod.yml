@@ -37,7 +37,7 @@ minio:
 
 webClient:
   recommendation:
-    url: http://localhost:8051
+    url: http://flask-recommender:8051
 
 
 jwt:
