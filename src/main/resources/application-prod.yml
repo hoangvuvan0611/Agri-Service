@@ -1,0 +1,47 @@
+server:
+  port: 8050
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: AGRI
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/AGRI_MARKET
+    username: vuvanhoang
+    password: Hoanglam06112003@
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration                           # Cấu hình migrarion flyway
+    url: jdbc:postgresql://localhost:5432/AGRI_MARKET
+    user: vuvanhoang
+    password: Hoanglam06112003@
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: debug
+        data.r2dbc: DEBUG
+    io.r2dbc.postgresql.QUERY: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG
+
+
+minio:
+  endpoint: https://s3minio.unilife.io.vn
+  #  endpoint: http://localhost:9000
+  access-key: admin
+  secret-key: admin123
+  bucket-name: agri-shop
+
+
+webClient:
+  recommendation:
+    url: http://localhost:5000
+
+
+jwt:
+  secret: 8r86whufhskfjhsdfjshdf
+  expiration: 345456
+  refresh:
+    expiration: 3244324
