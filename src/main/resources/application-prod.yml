@@ -37,7 +37,7 @@ minio:
 
 webClient:
   recommendation:
-    url: http://localhost:5000
+    url: http://localhost:8051
 
 
 jwt:
