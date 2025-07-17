@@ -14,7 +14,7 @@ spring:
     enabled: true
     baseline-on-migrate: true
     locations: classpath:db/migration                           # Cấu hình migrarion flyway
-    url: jdbc:postgresql://localhost:5432/AGRI_MARKET
+    url: jdbc:postgresql://172.17.0.1:5432/AGRI_MARKET
     user: vuvanhoang
     password: Hoanglam06112003@
 logging:
